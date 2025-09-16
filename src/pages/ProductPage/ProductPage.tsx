@@ -1,22 +1,26 @@
-import { FC, useEffect } from 'react'; // Added useEffect
+import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Section, Image } from '@telegram-apps/telegram-ui'; // Removed Button
+import { Section, Image } from '@telegram-apps/telegram-ui';
 import { Page } from '@/components/Page.tsx';
-import { mountMainButton, type MainButton } from '@telegram-apps/sdk-react'; // Changed to mountMainButton
-import { products } from '@/pages/IndexPage/IndexPage'; // Imported shared products
+import { mountMainButton } from '@telegram-apps/sdk-react';
+import { products } from '@/pages/IndexPage/IndexPage';
 
 export const ProductPage: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const product = products.find(p => p.id === Number(id)); // Changed to Number for id match
+  const product = products.find(p => p.id === Number(id));
 
   useEffect(() => {
-    mountMainButton.ifAvailable((button: MainButton) => { // Typed button
+    const cleanup = mountMainButton.ifAvailable(button => {
       button.setText('Купить товар');
-      button.setBgColor('#007AFF'); // Blue color
+      button.setBgColor('#007AFF');
       button.onClick(() => console.log('Купить товар'));
       button.show();
       return () => button.hide();
     });
+
+    return () => {
+      if (cleanup) cleanup();
+    };
   }, []);
 
   if (!product) {
@@ -29,10 +33,10 @@ export const ProductPage: FC = () => {
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
-        marginTop: '80px' // Added top margin
+        marginTop: '80px'
       }}>
         <Image
-          src={product.image}
+          src={product.photos ? product.photos[0] : product.image} // Use first photo
           style={{
             width: '100%',
             height: '60vh',

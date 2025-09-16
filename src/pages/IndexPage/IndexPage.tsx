@@ -15,8 +15,12 @@ const bannerImages = [
 ];
 
 const products = [
-  { name: 'Часы', price: '10K', image: 'https://example.com/watch.jpg' },
-  { name: 'Сумка', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
+  { name: 'Кондиционер', 
+    price: '10K', 
+    image: './tconditioner.png' },
+  { name: 'Сумка', 
+    price: '9 650 ₽', 
+    image: 'https://example.com/bag.jpg' },
   { name: 'Кроссовки', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
   { name: 'Кофта', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
 ];

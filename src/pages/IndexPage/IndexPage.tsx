@@ -9,16 +9,17 @@ import tonSvg from './ton.svg';
 
 // Placeholder изображения для баннера и товаров (замените на реальные пути или URLs)
 const bannerImages = [
-  'https://example.com/banner1.jpg', // Слайд 1
+  'https://i.pinimg.com/736x/74/13/80/7413809f825eeea082d2466b1a2cb231.jpg', // Слайд 1
   'https://example.com/banner2.jpg', // Слайд 2
   'https://example.com/banner3.jpg', // Слайд 3 (пролистывается 2 раза)
 ];
 
 export const products = [ // Exported
   { id: 1, name: 'Кондиционер 1', price: '18 000 ₽', image: 'https://basket-16.wbbasket.ru/vol2546/part254650/254650733/images/big/1.webp' },
-  { id: 2, name: 'Сумка', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
-  { id: 3, name: 'Кроссовки', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
-  { id: 4, name: 'Кофта', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
+  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
+  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
+  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
+  { id: 5, name: 'Кондиционер 5', price: '8 500 ₽', image: 'https://example.com/swрeater.jpg' },
 ];
 
 export const IndexPage: FC = () => {

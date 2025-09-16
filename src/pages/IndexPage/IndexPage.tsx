@@ -1,97 +1,43 @@
+import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
+
+import { Link } from '@/components/Link/Link.tsx';
 import { Page } from '@/components/Page.tsx';
 
-import './IndexPage.css';
 import tonSvg from './ton.svg';
 
 export const IndexPage: FC = () => {
   return (
     <Page back={false}>
-      <div className="hold">
-        <div className="hold__topbar">
-          <button className="hold__pill">
-            <span className="hold__pill-icon">×</span>
-            Закрыть
-          </button>
-          <div className="hold__title">HOLD market</div>
-          <div className="hold__actions">
-            <button className="hold__icon" aria-label="Search">🔍</button>
-            <button className="hold__menu" aria-label="Menu">⋯</button>
-          </div>
-        </div>
-
-        <div className="hold__filters">
-          <button className="chip chip--icon" aria-label="Sort">↕</button>
-          <button className="chip">Категории <span className="caret"/></button>
-          <button className="chip">В НАЛИЧИИ</button>
-          <button className="chip">ПОД ЗАКАЗ</button>
-        </div>
-
-        <div className="hold__carousel">
-          <div className="banner">
-            <div className="banner__content">
-              <div className="banner__season">ОСЕНЬ</div>
-              <div className="banner__subtitle">одежда и обувь</div>
-            </div>
-            <div className="banner__items">
-              <div className="banner__item"/>
-              <div className="banner__item"/>
-              <div className="banner__item"/>
-              <div className="banner__item"/>
-              <div className="banner__item"/>
-            </div>
-          </div>
-          <div className="dots">
-            <span className="dot active"/>
-            <span className="dot"/>
-            <span className="dot"/>
-          </div>
-        </div>
-
-        <div className="hold__stories">
-          <div className="story">
-            <img src={tonSvg} alt=""/>
-          </div>
-          <div className="story story--accent">СУМКИ</div>
-          <div className="story story--warm">ОБУВЬ ДО
-            <span className="story__price">10K</span>
-          </div>
-        </div>
-
-        <div className="hold__grid">
-          <div className="product">
-            <div className="product__image"/>
-            <div className="product__dots">
-              <span/>
-              <span/>
-              <span/>
-              <span/>
-            </div>
-            <div className="product__price">
-              <div className="price">11 747 ₽</div>
-              <div className="old">15 750 ₽</div>
-            </div>
-          </div>
-          <div className="product">
-            <div className="product__image product__image--alt"/>
-            <div className="product__dots">
-              <span/>
-              <span/>
-              <span/>
-              <span/>
-            </div>
-            <div className="product__price">
-              <div className="price">9 650 ₽</div>
-              <div className="old">11 650 ₽</div>
-            </div>
-          </div>
-        </div>
-
-        <button className="hold__fab">
-          <span className="hold__fab-badge">1</span>
-          🛍
-        </button>
-      </div>
+      <List>
+        <Section
+          header="Features"
+          footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
+        >
+          <Link to="/ton-connect">
+            <Cell
+              before={<Image src={tonSvg} style={{ backgroundColor: '#007AFF' }}/>}
+              subtitle="Connect your TON wallet"
+            >
+              TON Connect
+            </Cell>
+          </Link>
+        </Section>
+        <Section
+          header="Application Launch Data"
+          footer="These pages help developer to learn more about current launch information"
+        >
+          <Link to="/init-data">
+            <Cell subtitle="User data, chat information, technical data">Init Data</Cell>
+          </Link>
+          <Link to="/launch-params">
+            <Cell subtitle="Platform identifier, Mini Apps version, etc.">Launch Parameters</Cell>
+          </Link>
+          <Link to="/theme-params">
+            <Cell subtitle="Telegram application palette information">Theme Parameters</Cell>
+          </Link>
+        </Section>
+      </List>
     </Page>
   );
 };

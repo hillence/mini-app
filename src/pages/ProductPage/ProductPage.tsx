@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react'; // Added useEffect
 import { useParams } from 'react-router-dom';
 import { Section, Image, Button } from '@telegram-apps/telegram-ui'; // Changed to Button
 import { Page } from '@/components/Page.tsx';
+import { mainButton } from '@telegram-apps/sdk-react'; // Added for native BottomButton
 
 const products = [
   { id: '1', name: 'Часы', price: '10K', image: 'https://example.com/watch.jpg', description: 'Стильные часы с кожаным ремешком.' },
@@ -13,6 +14,20 @@ const products = [
 export const ProductPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const product = products.find(p => p.id === id);
+
+  useEffect(() => {
+    if (mainButton.isAvailable()) {
+      mainButton.setText('Купить товар');
+      mainButton.onClick(() => console.log('Купить товар'));
+      mainButton.show();
+    }
+
+    return () => {
+      if (mainButton.isAvailable()) {
+        mainButton.hide();
+      }
+    };
+  }, []);
 
   if (!product) {
     return <Page><div>Товар не найден</div></Page>;
@@ -36,18 +51,7 @@ export const ProductPage: FC = () => {
           <p>{product.description}</p>
         </Section>
       </div>
-      <Button
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1000,
-        }}
-        onClick={() => console.log('Купить товар')}
-      >
-        Купить товар
-      </Button>
+      {/* Removed fixed Button, using native mainButton instead */}
     </Page>
   );
 };

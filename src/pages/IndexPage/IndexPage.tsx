@@ -68,11 +68,23 @@ export const IndexPage: FC = () => {
                 <Cell
                   style={{
                     padding: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                   }}
-                  before={<Image src={product.image} style={{ width: '100%', height: '100px', objectFit: 'cover' }} />}
-                  subtitle={product.price}
                 >
-                  {product.name}
+                  <Image 
+                    src={product.image} 
+                    style={{ 
+                      width: '100%', 
+                      height: '150px', // Increased height
+                      objectFit: 'cover' 
+                    }} 
+                  />
+                  <div style={{ textAlign: 'center', marginTop: '8px' }}>
+                    <div>{product.name}</div>
+                    <div>{product.price}</div>
+                  </div>
                 </Cell>
               </Link>
             ))}

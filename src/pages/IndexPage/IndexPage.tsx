@@ -15,56 +15,11 @@ const bannerImages = [
 ];
 
 export const products = [ // Exported
-  { 
-    id: 1, 
-    name: 'Кондиционер 1', 
-    price: '18 000 ₽', 
-    photos: [
-      'https://basket-16.wbbasket.ru/vol2546/part254650/254650733/images/big/1.webp',
-      'https://example.com/photo2.jpg',
-      'https://example.com/photo3.jpg'
-    ] 
-  },
-  { 
-    id: 2, 
-    name: 'Кондиционер 2', 
-    price: '9 650 ₽', 
-    photos: [
-      'https://example.com/bag.jpg',
-      'https://example.com/photo2.jpg',
-      'https://example.com/photo3.jpg'
-    ] 
-  },
-  { 
-    id: 3, 
-    name: 'Кондиционер 3', 
-    price: '11 747 ₽', 
-    photos: [
-      'https://example.com/sneakers.jpg',
-      'https://example.com/photo2.jpg',
-      'https://example.com/photo3.jpg'
-    ] 
-  },
-  { 
-    id: 4, 
-    name: 'Кондиционер 4', 
-    price: '4 500 ₽', 
-    photos: [
-      'https://example.com/sweater.jpg',
-      'https://example.com/photo2.jpg',
-      'https://example.com/photo3.jpg'
-    ] 
-  },
-  { 
-    id: 5, 
-    name: 'Кондиционер 5', 
-    price: '8 500 ₽', 
-    photos: [
-      'https://example.com/swеater.jpg',
-      'https://example.com/photo2.jpg',
-      'https://example.com/photo3.jpg'
-    ] 
-  },
+  { id: 1, name: 'Кондиционер 1', price: '18 000 ₽', image: 'https://basket-16.wbbasket.ru/vol2546/part254650/254650733/images/big/1.webp' },
+  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
+  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
+  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
+  { id: 5, name: 'Кондиционер 5', price: '8 500 ₽', image: 'https://example.com/swрeater.jpg' },
 ];
 
 export const IndexPage: FC = () => {
@@ -156,57 +111,22 @@ export const IndexPage: FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'stretch',
-                    minHeight: '220px',
+                    minHeight: '250px',
                   }}
                 >
                   <div style={{ 
                     width: '100%', 
-                    height: '354px', // Fixed size ~265x354 (height primary)
+                    height: '180px', // Increased
                     overflow: 'hidden',
-                    position: 'relative',
                   }}>
-                    <div 
-                      style={{
-                        display: 'flex',
-                        overflowX: 'scroll',
-                        scrollSnapType: 'x mandatory',
+                    <Image 
+                      src={product.image} 
+                      style={{ 
+                        width: '100%', 
                         height: '100%',
-                      }}
-                    >
-                      {product.photos.map((src, idx) => (
-                        <Image
-                          key={idx}
-                          src={src}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            scrollSnapAlign: 'start',
-                            flexShrink: 0,
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <div style={{ 
-                      display: 'flex', 
-                      justifyContent: 'center', 
-                      position: 'absolute', 
-                      bottom: '8px', 
-                      width: '100%' 
-                    }}>
-                      {product.photos.map((_, idx) => (
-                        <div
-                          key={idx}
-                          style={{
-                            width: '6px',
-                            height: '6px',
-                            borderRadius: '50%',
-                            backgroundColor: idx === 0 ? '#007AFF' : '#C7C7C7', // Placeholder, add state if needed
-                            margin: '0 3px',
-                          }}
-                        />
-                      ))}
-                    </div>
+                        objectFit: 'cover',
+                      }} 
+                    />
                   </div>
                   <div style={{ 
                     textAlign: 'left', 

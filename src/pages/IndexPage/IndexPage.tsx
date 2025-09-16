@@ -111,12 +111,12 @@ export const IndexPage: FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'stretch',
-                    minHeight: '250px',
+                    minHeight: '300px',
                   }}
                 >
                   <div style={{ 
                     width: '100%', 
-                    height: '180px',
+                    height: '230px',
                     overflow: 'hidden',
                   }}>
                     <Image 

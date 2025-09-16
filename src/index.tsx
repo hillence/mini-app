@@ -16,28 +16,25 @@ import './mockEnv.ts';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
-if (!window.Telegram || !window.Telegram.WebApp) {
-  console.error('Telegram WebApp not available. Client may be too old or not in Telegram environment.');
-  root.render(<EnvUnsupported message="Your environment does not support Telegram Mini Apps. Please open in Telegram app v6.0 or higher." />);
-} else {
-  try {
-    const launchParams = retrieveLaunchParams();
-    const { tgWebAppPlatform: platform } = launchParams;
-    const debug = (launchParams.tgWebAppStartParam || '').includes('platformer_debug') || import.meta.env.DEV;
+try {
+  const launchParams = retrieveLaunchParams();
+  const { tgWebAppPlatform: platform } = launchParams;
+  const debug = (launchParams.tgWebAppStartParam || '').includes('platformer_debug')
+    || import.meta.env.DEV;
 
-    await init({
-      debug,
-      eruda: debug && ['ios', 'android'].includes(platform),
-      mockForMacOS: platform === 'macos',
-    }).then(() => {
+  // Configure all application dependencies.
+  await init({
+    debug,
+    eruda: debug && ['ios', 'android'].includes(platform),
+    mockForMacOS: platform === 'macos',
+  })
+    .then(() => {
       root.render(
         <StrictMode>
           <Root/>
         </StrictMode>,
       );
     });
-  } catch (e) {
-    console.error('Initialization error:', e);
-    root.render(<EnvUnsupported message={e.message || 'An error occurred during initialization. Please update your Telegram client.'} />);
-  }
+} catch (e) {
+  root.render(<EnvUnsupported/>);
 }

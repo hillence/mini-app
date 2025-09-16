@@ -5,7 +5,7 @@ import { InitDataPage } from '@/pages/InitDataPage.tsx';
 import { LaunchParamsPage } from '@/pages/LaunchParamsPage.tsx';
 import { ThemeParamsPage } from '@/pages/ThemeParamsPage.tsx';
 import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
-import { ProductPage } from '@/pages/ProductPage/ProductPage.tsx';
+import { ProductPage } from '@/pages/ProductPage/ProductPage';
 
 interface Route {
   path: string;
@@ -19,7 +19,6 @@ export const routes: Route[] = [
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
-  { path: '/product/:id', Component: ProductPage, title: 'Карточка товара' },
   {
     path: '/ton-connect',
     Component: TONConnectPage,
@@ -43,4 +42,5 @@ export const routes: Route[] = [
       </svg>
     ),
   },
+  { path: '/product/:id', Component: ProductPage, title: 'Карточка товара' },
 ];

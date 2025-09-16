@@ -1,8 +1,8 @@
 import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'; // Добавлено для состояния карусели
 
-import { Link } from '@/components/Link/Link.tsx';
+import { Link } from 'react-router-dom'; // For useParams in ProductPage, but here for consistency
 import { Page } from '@/components/Page.tsx';
 
 import tonSvg from './ton.svg';
@@ -26,11 +26,7 @@ const products = [
 ];
 
 export const IndexPage: FC = () => {
-  const navigate = useNavigate();
-
-  const handleProductClick = (id: number) => {
-    navigate(`/product/${id}`);
-  };
+  const [currentSlide, setCurrentSlide] = useState(0); // Состояние для карусели
 
   return (
     <Page back={false}>
@@ -66,21 +62,25 @@ export const IndexPage: FC = () => {
         <Section header="Товары" footer="Популярные товары">
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
               gap: '10px',
             }}
           >
             {products.map((product, index) => (
-              <Cell
-                key={index}
-                style={{ cursor: 'pointer' }}
-                onClick={() => handleProductClick(index)}
-                before={<Image src={product.image} style={{ width: '100%', height: '100px', objectFit: 'cover' }} />}
-                subtitle={product.price}
-              >
-                {product.name}
-              </Cell>
+              <Link to={`/product/${index}`} key={index} style={{ width: '48%', textDecoration: 'none' }}>
+                <Cell
+                  style={{
+                    width: '100%',
+                    marginBottom: '10px',
+                  }}
+                  before={<Image src={product.image} style={{ width: '100%', height: '100px', objectFit: 'cover' }} />}
+                  subtitle={product.price}
+                >
+                  {product.name}
+                </Cell>
+              </Link>
             ))}
           </div>
         </Section>

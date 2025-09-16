@@ -1,8 +1,7 @@
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
-
-import { App } from '@/components/App.tsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary.tsx';
 import { publicUrl } from '@/helpers/publicUrl.ts';
+import HoldMarketHomepage from '@/components/HoldMarket.tsx';
 
 function ErrorBoundaryError({ error }: { error: unknown }) {
   return (
@@ -27,7 +26,7 @@ export function Root() {
       <TonConnectUIProvider
         manifestUrl={publicUrl('tonconnect-manifest.json')}
       >
-        <App/>
+        <HoldMarketHomepage />
       </TonConnectUIProvider>
     </ErrorBoundary>
   );

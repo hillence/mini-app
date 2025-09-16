@@ -15,10 +15,10 @@ const bannerImages = [
 ];
 
 const products = [
-  { id: 1, name: 'Часы', price: '10K', image: 'https://example.com/watch.jpg' },
-  { id: 2, name: 'Сумка', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
-  { id: 3, name: 'Кроссовки', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
-  { id: 4, name: 'Кофта', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
+  { id: 1, name: 'Кондиционер 1', price: '10K', image: 'https://example.com/watch.jpg' },
+  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
+  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
+  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
 ];
 
 export const IndexPage: FC = () => {

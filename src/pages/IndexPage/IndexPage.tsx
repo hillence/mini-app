@@ -116,7 +116,7 @@ export const IndexPage: FC = () => {
                 >
                   <div style={{ 
                     width: '100%', 
-                    height: '180px', // Increased
+                    height: '180px',
                     overflow: 'hidden',
                   }}>
                     <Image 

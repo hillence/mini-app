@@ -1,0 +1,81 @@
+.hold {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hold__topbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.hold__pill {
+  justify-self: start;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 16px;
+  background: var(--tgui--secondary_bg_color, #f2f3f5);
+  color: var(--tgui--text_color, #111);
+  border: none;
+}
+
+.hold__pill-icon { margin-right: 8px; }
+
+.hold__title {
+  justify-self: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.hold__actions { justify-self: end; display: flex; gap: 8px; }
+.hold__icon, .hold__menu { height: 32px; width: 32px; border-radius: 16px; border: none; background: var(--tgui--secondary_bg_color, #f2f3f5); }
+
+.hold__filters { display: flex; gap: 8px; overflow-x: auto; padding: 0 4px; }
+.chip { white-space: nowrap; height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: var(--tgui--secondary_bg_color, #f2f3f5); }
+.chip--icon { width: 36px; padding: 0; }
+.caret { display: inline-block; width: 0; height: 0; margin-left: 6px; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid currentColor; }
+
+.hold__carousel { position: relative; }
+.banner {
+  height: 160px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f9d976 0%, #f39f86 40%, #a18cd1 100%);
+  position: relative;
+  overflow: hidden;
+}
+.banner__content { position: absolute; left: 16px; top: 16px; color: #fff; }
+.banner__season { font-size: 28px; font-weight: 800; letter-spacing: 1px; }
+.banner__subtitle { margin-top: 6px; opacity: .9; }
+.banner__items { position: absolute; bottom: 12px; left: 12px; right: 12px; display: flex; gap: 12px; }
+.banner__item { flex: 1; height: 44px; background: rgba(255,255,255,.9); border-radius: 10px; }
+
+.dots { display: flex; justify-content: center; gap: 6px; padding-top: 8px; }
+.dot { width: 6px; height: 6px; background: var(--tgui--hint_color, #999); border-radius: 3px; opacity: .5; }
+.dot.active { opacity: 1; }
+
+.hold__stories { display: grid; grid-auto-flow: column; grid-auto-columns: 96px; gap: 12px; overflow-x: auto; }
+.story { height: 96px; border-radius: 18px; background: linear-gradient(135deg, #d5eaff, #e9f3ff); display: grid; place-items: center; font-weight: 700; }
+.story--accent { background: linear-gradient(135deg, #ffd1e8, #ffe9f6); }
+.story--warm { background: linear-gradient(135deg, #ffe8b5, #ffd98e); display: grid; place-items: center; text-align: center; font-weight: 800; }
+.story__price { display: block; font-size: 22px; margin-top: 4px; }
+.story img { width: 44px; height: 44px; }
+
+.hold__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.product { background: var(--tgui--secondary_bg_color, #f2f3f5); border-radius: 14px; padding: 8px; position: relative; }
+.product__image { height: 220px; border-radius: 12px; background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22240%22 height=%22240%22%3E%3Crect width=%22240%22 height=%22240%22 fill=%22%23edeef0%22/%3E%3C/svg%3E') center/cover no-repeat; }
+.product__image--alt { background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22240%22 height=%22240%22%3E%3Crect width=%22240%22 height=%22240%22 fill=%22%23e6e9ef%22/%3E%3C/svg%3E') center/cover no-repeat; }
+.product__dots { position: absolute; left: 0; right: 0; bottom: 58px; display: flex; justify-content: center; gap: 6px; }
+.product__dots span { width: 6px; height: 6px; background: #c7c7c7; border-radius: 3px; }
+.product__price { margin-top: 8px; display: flex; gap: 8px; align-items: baseline; }
+.price { font-weight: 800; font-size: 18px; }
+.old { color: var(--tgui--hint_color, #8e8e93); text-decoration: line-through; }
+
+.hold__fab { position: fixed; right: 16px; bottom: 82px; width: 56px; height: 56px; border-radius: 28px; background: #0b8cff; color: #fff; border: none; font-size: 24px; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(11,140,255,.35); }
+.hold__fab-badge { position: absolute; top: -2px; right: -2px; width: 20px; height: 20px; background: #111; color: #fff; font-size: 12px; border-radius: 10px; display: grid; place-items: center; }
+
+@media (min-width: 480px) {
+  .product__image { height: 260px; }
+}
+

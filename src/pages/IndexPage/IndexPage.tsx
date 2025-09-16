@@ -1,6 +1,7 @@
 import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
 import { useState } from 'react'; // Добавлено для состояния карусели
+import { useNavigate } from 'react-router-dom';
 
 import { Link } from '@/components/Link/Link.tsx';
 import { Page } from '@/components/Page.tsx';
@@ -16,7 +17,7 @@ const bannerImages = [
 
 const products = [
   { name: 'Кондиционер', 
-    price: '10K', 
+    price: '31 000 ₽', 
     image: './tconditioner.png' },
   { name: 'Сумка', 
     price: '9 650 ₽', 
@@ -27,6 +28,11 @@ const products = [
 
 export const IndexPage: FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0); // Состояние для карусели
+  const navigate = useNavigate();
+
+  const handleProductClick = (id: number) => {
+    navigate(`/product/${id}`);
+  };
 
   return (
     <Page back={false}>
@@ -62,19 +68,16 @@ export const IndexPage: FC = () => {
         <Section header="Товары" footer="Популярные товары">
           <div
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
               gap: '10px',
             }}
           >
             {products.map((product, index) => (
               <Cell
                 key={index}
-                style={{
-                  width: '48%', // Два ряда
-                  marginBottom: '10px',
-                }}
+                style={{ cursor: 'pointer' }}
+                onClick={() => handleProductClick(index)}
                 before={<Image src={product.image} style={{ width: '100%', height: '100px', objectFit: 'cover' }} />}
                 subtitle={product.price}
               >

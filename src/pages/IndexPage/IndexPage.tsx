@@ -1,6 +1,7 @@
 import { Section, Cell, Image, List, IconButton } from '@telegram-apps/telegram-ui'; // Added IconButton
 import type { FC } from 'react';
-import { useState, useRef } from 'react'; // Added useRef
+import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Link } from '@/components/Link/Link.tsx';
 import { Page } from '@/components/Page.tsx';
@@ -23,8 +24,9 @@ export const products = [ // Exported
 ];
 
 export const IndexPage: FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0); // Состояние для карусели
+  const [currentSlide, setCurrentSlide] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -44,8 +46,8 @@ export const IndexPage: FC = () => {
               <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
             </svg>
           </IconButton>
-          <IconButton mode="plain" size="s">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"> {/* Icon28Search placeholder */}
+          <IconButton mode="plain" size="s" onClick={() => navigate('/search')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
             </svg>
           </IconButton>
@@ -53,7 +55,7 @@ export const IndexPage: FC = () => {
 
         {/* Новый раздел: Баннер с пролистыванием */}
         <div style={{ backgroundColor: 'transparent', marginBottom: '16px' }}>
-          <h2 style={{ padding: '0 16px', margin: '16px 0 8px 0', fontSize: '17px', fontWeight: '600' }}>АКЦИИ</h2>
+          <h2 style={{ padding: '0 16px', margin: '16px 0 8px 0', fontSize: '17px', fontWeight: '600', fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif' }}>АКЦИИ</h2>
           <div
             ref={scrollRef}
             onScroll={handleScroll}
@@ -97,8 +99,8 @@ export const IndexPage: FC = () => {
         </div>
 
         {/* Новый раздел: Товары в два ряда */}
-        <div style={{ backgroundColor: 'transparent' }}>
-          <h2 style={{ padding: '0 16px', margin: '16px 0 8px 0', fontSize: '17px', fontWeight: '600' }}>ТОВАРЫ</h2>
+        <div style={{ backgroundColor: 'transparent', marginTop: '146px' }}>
+          <h2 style={{ padding: '0 16px', margin: '16px 0 8px 0', fontSize: '17px', fontWeight: '600', fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif' }}>ТОВАРЫ</h2>
           <div
             style={{
               display: 'grid',
@@ -142,8 +144,8 @@ export const IndexPage: FC = () => {
                     paddingLeft: '0px',
                     backgroundColor: 'transparent',
                   }}>
-                    <div style={{ fontSize: '16px', fontWeight: '500', marginBottom: '4px' }}>{product.name}</div>
-                    <div style={{ fontSize: '16px', fontWeight: '600', color: '#000' }}>{product.price}</div>
+                    <div style={{ fontSize: '16px', fontWeight: '500', marginBottom: '4px', fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif' }}>{product.name}</div>
+                    <div style={{ fontSize: '16px', fontWeight: '600', color: '#000', fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif' }}>{product.price}</div>
                   </div>
                 </div>
               </Link>

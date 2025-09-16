@@ -54,10 +54,41 @@ export const ProductPage: FC = () => {
           }}
         />
         <Section style={{ backgroundColor: 'transparent', padding: '16px' }}>
-          <h2 style={{ margin: 0, marginBottom: '8px' }}>{product.name}</h2>
-          <p style={{ margin: 0, marginBottom: '16px', fontSize: '18px', fontWeight: 'bold' }}>{product.price}</p>
-          <h3 style={{ margin: 0, marginBottom: '8px' }}>Описание товара</h3>
-          <p style={{ margin: 0 }}>{product.description}</p>
+          <h2 style={{ 
+            margin: 0, 
+            marginBottom: '8px', 
+            fontSize: '28px', 
+            fontWeight: '700',
+            fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+          }}>
+            {product.name}
+          </h2>
+          <p style={{ 
+            margin: 0, 
+            marginBottom: '16px', 
+            fontSize: '24px', 
+            fontWeight: '600',
+            fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+          }}>
+            {product.price}
+          </p>
+          <h3 style={{ 
+            margin: 0, 
+            marginBottom: '8px', 
+            fontSize: '20px', 
+            fontWeight: '600',
+            fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+          }}>
+            Описание товара
+          </h3>
+          <p style={{ 
+            margin: 0, 
+            fontSize: '17px', 
+            lineHeight: '22px',
+            fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+          }}>
+            {product.description}
+          </p>
         </Section>
       </div>
     </Page>

@@ -6,6 +6,7 @@ import { LaunchParamsPage } from '@/pages/LaunchParamsPage.tsx';
 import { ThemeParamsPage } from '@/pages/ThemeParamsPage.tsx';
 import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import { ProductPage } from '@/pages/ProductPage/ProductPage';
+import { SearchPage } from '@/pages/SearchPage/SearchPage';
 
 interface Route {
   path: string;
@@ -43,4 +44,5 @@ export const routes: Route[] = [
     ),
   },
   { path: '/product/:id', Component: ProductPage },
+  { path: '/search', Component: SearchPage },
 ];

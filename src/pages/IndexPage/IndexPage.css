@@ -1,49 +1,44 @@
-.marketplace {
-  min-height: 100vh;
-}
-
-.marketplace__header {
-  padding: 16px;
-}
-
-.header__spacer {
-  height: 8px;
-}
-
-.marketplace__filters {
+.filters {
   display: flex;
   gap: 8px;
-  padding: 8px 0;
   overflow-x: auto;
+  padding: 8px 0;
 }
 
-.marketplace__promo {
+.promo-banner {
   background: linear-gradient(135deg, #ff9a56 0%, #ff6b9d 50%, #c471ed 100%);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 24px;
   color: white;
   position: relative;
-  margin: 8px 0;
+  overflow: hidden;
 }
 
-.promo__content {
+.promo-content {
   position: relative;
   z-index: 1;
 }
 
-.promo__subtitle {
+.promo-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+}
+
+.promo-subtitle {
   font-size: 16px;
-  margin: 4px 0 16px 0;
+  margin: 0 0 16px 0;
   opacity: 0.9;
 }
 
-.promo__items {
+.promo-items {
   display: flex;
   gap: 12px;
   margin-bottom: 16px;
 }
 
-.promo__item {
+.promo-item {
   width: 48px;
   height: 48px;
   background: rgba(255, 255, 255, 0.2);
@@ -54,7 +49,7 @@
   font-size: 24px;
 }
 
-.promo__indicators {
+.promo-indicators {
   position: absolute;
   bottom: 16px;
   left: 50%;
@@ -74,121 +69,125 @@
   background: white;
 }
 
-.marketplace__grid {
+.category-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
+  gap: 12px;
+  margin: 16px 0;
 }
 
-.grid__item {
+.category-item {
   aspect-ratio: 1;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  position: relative;
 }
 
-.grid__item.orange {
+.category-item.watches {
+  background: linear-gradient(135deg, #00d4aa 0%, #0099cc 100%);
+}
+
+.category-item.bags {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+}
+
+.category-item.shoes-promo {
   background: linear-gradient(135deg, #ff9500 0%, #ffcc00 100%);
   color: #000;
 }
 
-.item__image {
+.category-icon {
   font-size: 32px;
-  margin-bottom: 8px;
+  color: white;
 }
 
-.item__text {
-  font-size: 12px;
-  font-weight: 500;
-  text-align: center;
-  margin: 0;
-}
-
-.item__label {
+.promo-text {
   font-size: 10px;
   font-weight: 600;
   opacity: 0.8;
   margin: 0;
 }
 
-.item__price {
+.promo-price {
   font-size: 24px;
   font-weight: 700;
   margin: 0;
 }
 
-.item__emoji {
+.promo-emoji {
   position: absolute;
   bottom: 8px;
   right: 8px;
   font-size: 16px;
 }
 
-.marketplace__products {
+.products-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 16px;
+  gap: 16px;
+  margin: 16px 0;
 }
 
-.product {
-  border-radius: 12px;
+.product-cell {
+  padding: 0 !important;
+}
+
+.product-card {
+  border-radius: 16px;
   overflow: hidden;
-  position: relative;
+  background: var(--tg-color-background-secondary);
 }
 
-.product__image {
+.product-image {
   aspect-ratio: 1;
-  background: var(--tg-color-neutral-background-2, #f1f1f1);
+  background: #f5f5f5;
   position: relative;
   overflow: hidden;
 }
 
-.product__image img {
+.product-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.product__info {
-  padding: 12px;
-}
-
-.product__price {
-  margin-bottom: 8px;
-}
-
-.price__current {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--tg-color-text-primary, #000);
-}
-
-.price__original {
-  font-size: 14px;
-  color: var(--tg-color-text-hint, #999);
-  text-decoration: line-through;
-  margin-left: 8px;
-}
-
-.product__name {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--tg-color-text-secondary, #666);
-  margin: 0;
-  line-height: 1.3;
-}
-
-.product__indicators {
+.product-indicators {
   position: absolute;
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 4px;
+}
+
+.product-info {
+  padding: 12px;
+}
+
+.product-price {
+  margin-bottom: 8px;
+}
+
+.current-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--tg-color-text);
+}
+
+.original-price {
+  font-size: 14px;
+  color: var(--tg-color-text-hint);
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--tg-color-text-hint);
+  margin: 0;
+  line-height: 1.3;
 }

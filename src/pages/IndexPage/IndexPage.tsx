@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Section, Cell, Title, Button } from '@telegram-apps/telegram-ui';
+import { List, Section, Cell, Chip } from '@telegram-apps/telegram-ui';
 import './IndexPage.css';
 
 interface Product {
@@ -29,33 +29,29 @@ const products: Product[] = [
 
 export const IndexPage: FC = () => {
   return (
-    <div className="marketplace">
-      <div className="marketplace__header">
-        <div className="header__spacer"></div>
-      </div>
-
+    <List>
       <Section>
-        <div className="marketplace__filters">
-          <Button size="s" mode="gray">⇅</Button>
-          <Button size="s" mode="gray">Категории ▼</Button>
-          <Button size="s" mode="gray">В НАЛИЧИИ</Button>
-          <Button size="s" mode="gray">ПОД ЗАКАЗ</Button>
+        <div className="filters">
+          <Chip mode="elevated">⇅</Chip>
+          <Chip mode="elevated">Категории ▼</Chip>
+          <Chip mode="elevated">В НАЛИЧИИ</Chip>
+          <Chip mode="elevated">ПОД ЗАКАЗ</Chip>
         </div>
       </Section>
 
       <Section>
-        <div className="marketplace__promo">
-          <div className="promo__content">
-            <Title level="2" weight="2">ОСЕНЬ</Title>
-            <div className="promo__subtitle">одежда и обувь</div>
-            <div className="promo__items">
-              <div className="promo__item">👟</div>
-              <div className="promo__item">🧥</div>
-              <div className="promo__item">👕</div>
-              <div className="promo__item">👞</div>
+        <div className="promo-banner">
+          <div className="promo-content">
+            <h2 className="promo-title">ОСЕНЬ</h2>
+            <p className="promo-subtitle">одежда и обувь</p>
+            <div className="promo-items">
+              <div className="promo-item">👟</div>
+              <div className="promo-item">🧥</div>
+              <div className="promo-item">👕</div>
+              <div className="promo-item">👞</div>
             </div>
           </div>
-          <div className="promo__indicators">
+          <div className="promo-indicators">
             <span className="indicator active"></span>
             <span className="indicator"></span>
             <span className="indicator"></span>
@@ -64,59 +60,49 @@ export const IndexPage: FC = () => {
       </Section>
 
       <Section>
-        <div className="marketplace__grid">
-          <Cell>
-            <div className="grid__item">
-              <div className="item__image">⌚</div>
-              <div className="item__text">Часы</div>
-            </div>
-          </Cell>
-          
-          <Cell>
-            <div className="grid__item">
-              <div className="item__image">👜</div>
-              <div className="item__text">Сумки</div>
-            </div>
-          </Cell>
-          
-          <Cell>
-            <div className="grid__item orange">
-              <div className="item__label">ОБУВЬ ДО</div>
-              <div className="item__price">10K</div>
-              <span className="item__emoji">😊</span>
-            </div>
-          </Cell>
+        <div className="category-grid">
+          <div className="category-item watches">
+            <div className="category-icon">⌚</div>
+          </div>
+          <div className="category-item bags">
+            <div className="category-icon">👜</div>
+          </div>
+          <div className="category-item shoes-promo">
+            <div className="promo-text">ОБУВЬ ДО</div>
+            <div className="promo-price">10K</div>
+            <div className="promo-emoji">😊</div>
+          </div>
         </div>
       </Section>
 
       <Section>
-        <div className="marketplace__products">
+        <div className="products-grid">
           {products.map((product) => (
-            <Cell key={product.id}>
-              <div className="product">
-                <div className="product__image">
+            <Cell key={product.id} className="product-cell">
+              <div className="product-card">
+                <div className="product-image">
                   <img src={product.image} alt={product.name} />
+                  <div className="product-indicators">
+                    <span className="indicator active"></span>
+                    <span className="indicator"></span>
+                    <span className="indicator"></span>
+                    <span className="indicator"></span>
+                  </div>
                 </div>
-                <div className="product__info">
-                  <div className="product__price">
-                    <span className="price__current">{product.price.toLocaleString()} ₽</span>
+                <div className="product-info">
+                  <div className="product-price">
+                    <span className="current-price">{product.price.toLocaleString()} ₽</span>
                     {product.originalPrice && (
-                      <span className="price__original">{product.originalPrice.toLocaleString()} ₽</span>
+                      <span className="original-price">{product.originalPrice.toLocaleString()} ₽</span>
                     )}
                   </div>
-                  <div className="product__name">{product.name}</div>
-                </div>
-                <div className="product__indicators">
-                  <span className="indicator active"></span>
-                  <span className="indicator"></span>
-                  <span className="indicator"></span>
-                  <span className="indicator"></span>
+                  <div className="product-name">{product.name}</div>
                 </div>
               </div>
             </Cell>
           ))}
         </div>
       </Section>
-    </div>
+    </List>
   );
 };

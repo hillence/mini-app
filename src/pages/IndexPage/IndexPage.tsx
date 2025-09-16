@@ -1,6 +1,5 @@
 import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
-import { useState } from 'react'; // Добавлено для состояния карусели
 import { useNavigate } from 'react-router-dom';
 
 import { Link } from '@/components/Link/Link.tsx';
@@ -27,7 +26,6 @@ const products = [
 ];
 
 export const IndexPage: FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0); // Состояние для карусели
   const navigate = useNavigate();
 
   const handleProductClick = (id: number) => {

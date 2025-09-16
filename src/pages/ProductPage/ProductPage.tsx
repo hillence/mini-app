@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Page } from '@/components/Page.tsx';
 import { Image, Section, Text } from '@telegram-apps/telegram-ui';
-import { useSignal, bottomButton, viewport } from '@telegram-apps/sdk-react';
+// Убрать SDK импорты
 
 const products = [
   { name: 'Кондиционер', price: '31 000 ₽', image: './tconditioner.png', description: 'Эффективный кондиционер для дома.' },
@@ -16,18 +16,25 @@ export const ProductPage: FC = () => {
   const productId = parseInt(id || '0', 10);
   const product = products[productId] || products[0];
 
-  const vp = useSignal(viewport);
-  const photoHeight = vp?.height ? Math.floor(vp.height * 0.6) : 300;
+  const photoHeight = window.Telegram?.WebApp?.viewportHeight ? Math.floor(window.Telegram.WebApp.viewportHeight * 0.6) : 300;
 
-  // Настройка BottomButton
-  const bb = useSignal(bottomButton);
-  bb.setText('Купить товар');
-  bb.setBackgroundColor('var(--tg-theme-button-color)');
-  bb.show();
-  bb.on('click', () => {
-    console.log(`Покупка: ${product.name}`);
-    // Логика покупки
-  });
+  useEffect(() => {
+    const WebApp = window.Telegram?.WebApp;
+    if (WebApp) {
+      WebApp.MainButton.text = 'Купить товар';
+      WebApp.MainButton.color = WebApp.themeParams?.button_color || '#007AFF';
+      WebApp.MainButton.onClick(() => {
+        WebApp.HapticFeedback?.impactOccurred('medium');
+        console.log(`Покупка: ${product.name}`);
+      });
+      WebApp.MainButton.show();
+    }
+
+    return () => {
+      window.Telegram?.WebApp?.MainButton.hide();
+      window.Telegram?.WebApp?.MainButton.offClick();
+    };
+  }, [product.name]);
 
   return (
     <Page>

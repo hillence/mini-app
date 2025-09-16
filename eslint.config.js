@@ -5,6 +5,7 @@ import tseslint from 'typescript-eslint';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
+import ts from '@typescript-eslint/parser';
 
 export default tseslint.config(
   {
@@ -18,12 +19,10 @@ export default tseslint.config(
       'react-hooks': reactHooks
     },
     languageOptions: {
+      parser: ts,
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true,
-        },
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
       },
       globals: {
         ...globals.browser,

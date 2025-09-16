@@ -17,7 +17,7 @@ import {
 /**
  * Initializes the application and configures its dependencies.
  */
-export async function init(options: {
+export function init(options: {
   debug: boolean;
   eruda: boolean;
   mockForMacOS: boolean;
@@ -70,5 +70,5 @@ export async function init(options: {
 
   mountViewport.isAvailable() && mountViewport().then(() => {
     bindViewportCssVars();
-  });
+  }).catch(() => {}); // Игнорировать ошибку
 }

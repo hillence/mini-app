@@ -1,6 +1,6 @@
-import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
+import { Section, Cell, Image, List, IconButton } from '@telegram-apps/telegram-ui'; // Added IconButton
 import type { FC } from 'react';
-import { useState } from 'react'; // Добавлено для состояния карусели
+import { useState, useRef } from 'react'; // Added useRef
 
 import { Link } from '@/components/Link/Link.tsx';
 import { Page } from '@/components/Page.tsx';
@@ -14,22 +14,47 @@ const bannerImages = [
   'https://example.com/banner3.jpg', // Слайд 3 (пролистывается 2 раза)
 ];
 
-const products = [
-  { id: 1, name: 'Кондиционер 1', price: '10K', image: 'https://example.com/watch.jpg' },
-  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
-  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
-  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
+export const products = [ // Exported
+  { id: 1, name: 'Кондиционер 1', price: '18 000 ₽', image: 'https://basket-16.wbbasket.ru/vol2546/part254650/254650733/images/big/1.webp' },
+  { id: 2, name: 'Сумка', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
+  { id: 3, name: 'Кроссовки', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
+  { id: 4, name: 'Кофта', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
 ];
 
 export const IndexPage: FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0); // Состояние для карусели
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const slideWidth = scrollRef.current.clientWidth;
+      const scrollLeft = scrollRef.current.scrollLeft;
+      setCurrentSlide(Math.round(scrollLeft / slideWidth));
+    }
+  };
 
   return (
     <Page back={false}>
       <List>
+        {/* Top bar with menu and search */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px' }}>
+          <IconButton mode="plain" size="s">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"> {/* Icon28Menu placeholder */}
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+          </IconButton>
+          <IconButton mode="plain" size="s">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"> {/* Icon28Search placeholder */}
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+          </IconButton>
+        </div>
+
         {/* Новый раздел: Баннер с пролистыванием */}
         <Section header="Акции" footer="Пролистайте для просмотра (2 пролистывания)">
           <div
+            ref={scrollRef}
+            onScroll={handleScroll}
             style={{
               display: 'flex',
               overflowX: 'scroll',
@@ -52,6 +77,21 @@ export const IndexPage: FC = () => {
               />
             ))}
           </div>
+          {/* Dots indicators */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
+            {bannerImages.map((_, index) => (
+              <div
+                key={index}
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  backgroundColor: currentSlide === index ? '#007AFF' : '#C7C7C7',
+                  margin: '0 4px',
+                }}
+              />
+            ))}
+          </div>
         </Section>
 
         {/* Новый раздел: Товары в два ряда */}
@@ -70,7 +110,7 @@ export const IndexPage: FC = () => {
                     padding: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
+                    alignItems: 'stretch', // Changed to stretch for left alignment
                     minHeight: '220px',
                   }}
                 >
@@ -88,7 +128,11 @@ export const IndexPage: FC = () => {
                       }} 
                     />
                   </div>
-                  <div style={{ textAlign: 'center', marginTop: '8px' }}>
+                  <div style={{ 
+                    textAlign: 'left', 
+                    marginTop: '8px', 
+                    paddingLeft: '8px' 
+                  }}>
                     <div>{product.name}</div>
                     <div>{product.price}</div>
                   </div>

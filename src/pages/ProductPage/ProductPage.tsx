@@ -3,20 +3,14 @@ import { useParams } from 'react-router-dom';
 import { Section, Image } from '@telegram-apps/telegram-ui'; // Removed Button
 import { Page } from '@/components/Page.tsx';
 import { mountMainButton } from '@telegram-apps/sdk-react'; // Changed to mountMainButton
-
-const products = [
-  { id: '1', name: 'Часы', price: '10K', image: 'https://example.com/watch.jpg', description: 'Адаптивный дизайн и т.д.' },
-  { id: '2', name: 'Сумка', price: '9 650 ₽', image: 'https://example.com/bag.jpg', description: 'Адаптивный дизайн и т.д.' },
-  { id: '3', name: 'Кроссовки', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg', description: 'Адаптивный дизайн и т.д.' },
-  { id: '4', name: 'Кофта', price: '4 500 ₽', image: 'https://example.com/sweater.jpg', description: 'Адаптивный дизайн и т.д.' },
-];
+import { products } from '@/pages/IndexPage/IndexPage'; // Imported shared products
 
 export const ProductPage: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const product = products.find(p => p.id === id);
+  const product = products.find(p => p.id === Number(id)); // Changed to Number for id match
 
   useEffect(() => {
-    mountMainButton.ifAvailable((button) => {
+    mountMainButton.ifAvailable(button => {
       button.setText('Купить товар');
       button.onClick(() => console.log('Купить товар'));
       button.show();

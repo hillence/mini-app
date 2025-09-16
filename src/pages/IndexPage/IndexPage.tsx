@@ -71,14 +71,13 @@ export const IndexPage: FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    height: '220px', // Fixed height for entire card
+                    minHeight: '220px',
                   }}
                 >
                   <div style={{ 
                     width: '100%', 
                     height: '150px',
                     overflow: 'hidden',
-                    position: 'relative'
                   }}>
                     <Image 
                       src={product.image} 
@@ -86,22 +85,11 @@ export const IndexPage: FC = () => {
                         width: '100%', 
                         height: '100%',
                         objectFit: 'cover',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0
                       }} 
                     />
                   </div>
-                  <div style={{ 
-                    textAlign: 'center', 
-                    marginTop: '8px', 
-                    overflow: 'hidden', 
-                    textOverflow: 'ellipsis', 
-                    maxHeight: '50px',
-                    padding: '0 4px',
-                    width: '100%'
-                  }}>
-                    <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.name}</div>
+                  <div style={{ textAlign: 'center', marginTop: '8px' }}>
+                    <div>{product.name}</div>
                     <div>{product.price}</div>
                   </div>
                 </Cell>

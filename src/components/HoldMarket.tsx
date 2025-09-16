@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Search, Menu, ChevronDown } from 'lucide-react';
 
 const HoldMarketHomepage = () => {
   const [activeCategory, setActiveCategory] = useState('Категории');
@@ -25,9 +24,15 @@ const HoldMarketHomepage = () => {
 
       {/* Header */}
       <div className="bg-white px-4 py-4 flex items-center justify-between">
-        <Menu className="w-6 h-6 text-gray-600" />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-gray-600">
+          <path d="M3 12h18m-9 9V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
         <h1 className="text-xl font-bold text-gray-900">HOLD market</h1>
-        <Search className="w-6 h-6 text-blue-500" />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-blue-500">
+          <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
+          <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
       </div>
 
       {/* Navigation */}
@@ -41,7 +46,9 @@ const HoldMarketHomepage = () => {
         </div>
         <button className="flex items-center space-x-2 text-gray-900">
           <span>{activeCategory}</span>
-          <ChevronDown className="w-4 h-4" />
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
         </button>
         <div className="text-gray-600">В НАЛИЧИИ</div>
         <div className="text-gray-600">ПОД ЗАКАЗ</div>

@@ -52,7 +52,8 @@ export const IndexPage: FC = () => {
         </div>
 
         {/* Новый раздел: Баннер с пролистыванием */}
-        <Section header="Акции">
+        <div style={{ backgroundColor: 'transparent', marginBottom: '16px' }}>
+          <h2 style={{ padding: '0 16px', margin: '16px 0 8px 0', fontSize: '17px', fontWeight: '600' }}>АКЦИИ</h2>
           <div
             ref={scrollRef}
             onScroll={handleScroll}
@@ -60,8 +61,9 @@ export const IndexPage: FC = () => {
               display: 'flex',
               overflowX: 'scroll',
               scrollSnapType: 'x mandatory',
-              gap: '10px',
-              padding: '10px 0',
+              gap: '0px',
+              padding: '0',
+              margin: '0',
             }}
           >
             {bannerImages.map((src, index) => (
@@ -69,8 +71,8 @@ export const IndexPage: FC = () => {
                 key={index}
                 src={src}
                 style={{
-                  width: '100%',
-                  height: '150px',
+                  width: '100vw',
+                  height: '200px',
                   objectFit: 'cover',
                   scrollSnapAlign: 'start',
                   flexShrink: 0,
@@ -78,46 +80,52 @@ export const IndexPage: FC = () => {
               />
             ))}
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
-            {bannerImages.map((_, index) => (
-              <div
-                key={index}
-                style={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  backgroundColor: currentSlide === index ? '#007AFF' : '#C7C7C7',
-                  margin: '0 4px',
-                }}
-              />
-            ))}
-          </div>
-        </Section>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px', backgroundColor: 'transparent' }}>
+          {bannerImages.map((_, index) => (
+            <div
+              key={index}
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                backgroundColor: currentSlide === index ? '#007AFF' : '#C7C7C7',
+                margin: '0 4px',
+              }}
+            />
+          ))}
+        </div>
 
         {/* Новый раздел: Товары в два ряда */}
-        <Section header="Товары" footer="Популярные товары">
+        <div style={{ backgroundColor: 'transparent' }}>
+          <h2 style={{ padding: '0 16px', margin: '16px 0 8px 0', fontSize: '17px', fontWeight: '600' }}>ТОВАРЫ</h2>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '10px',
+              gap: '8px',
+              padding: '0 16px',
+              backgroundColor: 'transparent',
             }}
           >
             {products.map((product) => (
               <Link key={product.id} to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                <Cell
+                <div
                   style={{
-                    padding: 0,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'stretch',
                     minHeight: '300px',
+                    backgroundColor: 'transparent',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
                   }}
                 >
                   <div style={{ 
                     width: '100%', 
                     height: '230px',
                     overflow: 'hidden',
+                    borderRadius: '12px 12px 0 0',
                   }}>
                     <Image 
                       src={product.image} 
@@ -131,16 +139,17 @@ export const IndexPage: FC = () => {
                   <div style={{ 
                     textAlign: 'left', 
                     marginTop: '8px', 
-                    paddingLeft: '8px' 
+                    paddingLeft: '0px',
+                    backgroundColor: 'transparent',
                   }}>
-                    <div>{product.name}</div>
-                    <div>{product.price}</div>
+                    <div style={{ fontSize: '16px', fontWeight: '500', marginBottom: '4px' }}>{product.name}</div>
+                    <div style={{ fontSize: '16px', fontWeight: '600', color: '#000' }}>{product.price}</div>
                   </div>
-                </Cell>
+                </div>
               </Link>
             ))}
           </div>
-        </Section>
+        </div>
 
         {/* Существующий контент (оставлен для совместимости) */}
         <Section

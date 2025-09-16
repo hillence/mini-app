@@ -40,8 +40,10 @@ export const ProductPage: FC = () => {
       <div style={{ 
         display: 'flex', 
         flexDirection: 'column', 
-        height: '100%', 
-        marginTop: '80px' // Added top margin
+        height: '100vh',
+        backgroundColor: 'transparent',
+        padding: 0,
+        margin: 0
       }}>
         <Image
           src={product.image}
@@ -51,11 +53,11 @@ export const ProductPage: FC = () => {
             objectFit: 'cover',
           }}
         />
-        <Section>
-          <h2>{product.name}</h2>
-          <p>{product.price}</p>
-          <h3>Описание товара</h3>
-          <p>{product.description}</p>
+        <Section style={{ backgroundColor: 'transparent', padding: '16px' }}>
+          <h2 style={{ margin: 0, marginBottom: '8px' }}>{product.name}</h2>
+          <p style={{ margin: 0, marginBottom: '16px', fontSize: '18px', fontWeight: 'bold' }}>{product.price}</p>
+          <h3 style={{ margin: 0, marginBottom: '8px' }}>Описание товара</h3>
+          <p style={{ margin: 0 }}>{product.description}</p>
         </Section>
       </div>
     </Page>

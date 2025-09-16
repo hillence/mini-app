@@ -1,8 +1,8 @@
 import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
-import { useState } from 'react'; // Добавлено для состояния карусели
+import { useNavigate } from 'react-router-dom';
 
-import { Link } from 'react-router-dom'; // For useParams in ProductPage, but here for consistency
+import { Link } from '@/components/Link/Link.tsx';
 import { Page } from '@/components/Page.tsx';
 
 import tonSvg from './ton.svg';
@@ -15,18 +15,18 @@ const bannerImages = [
 ];
 
 const products = [
-  { name: 'Кондиционер', 
-    price: '31 000 ₽', 
-    image: './tconditioner.png' },
-  { name: 'Сумка', 
-    price: '9 650 ₽', 
-    image: 'https://example.com/bag.jpg' },
-  { name: 'Кроссовки', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
-  { name: 'Кофта', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
+  { id: 1, name: 'Кондиционер', price: '31 000 ₽', image: './tconditioner.png' },
+  { id: 2, name: 'Сумка', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
+  { id: 3, name: 'Кроссовки', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
+  { id: 4, name: 'Кофта', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
 ];
 
 export const IndexPage: FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0); // Состояние для карусели
+  const navigate = useNavigate();
+
+  const handleProductClick = (product: typeof products[0]) => {
+    navigate('/product', { state: { product } });
+  };
 
   return (
     <Page back={false}>
@@ -62,25 +62,51 @@ export const IndexPage: FC = () => {
         <Section header="Товары" footer="Популярные товары">
           <div
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-              gap: '10px',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '12px',
+              padding: '0 8px',
             }}
           >
-            {products.map((product, index) => (
-              <Link to={`/product/${index}`} key={index} style={{ width: '48%', textDecoration: 'none' }}>
-                <Cell
-                  style={{
-                    width: '100%',
-                    marginBottom: '10px',
-                  }}
-                  before={<Image src={product.image} style={{ width: '100%', height: '100px', objectFit: 'cover' }} />}
-                  subtitle={product.price}
-                >
-                  {product.name}
-                </Cell>
-              </Link>
+            {products.map((product) => (
+              <div
+                key={product.id}
+                onClick={() => handleProductClick(product)}
+                style={{
+                  border: '1px solid var(--tg-theme-section-separator-color, #e0e0e0)',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
+                }}
+              >
+                <Image 
+                  src={product.image} 
+                  style={{ 
+                    width: '100%', 
+                    height: '120px', 
+                    objectFit: 'cover' 
+                  }} 
+                />
+                <div style={{ padding: '12px' }}>
+                  <h3 style={{ 
+                    margin: '0 0 4px 0', 
+                    fontSize: '14px', 
+                    fontWeight: '500',
+                    color: 'var(--tg-theme-text-color, #000000)'
+                  }}>
+                    {product.name}
+                  </h3>
+                  <p style={{ 
+                    margin: 0, 
+                    fontSize: '16px', 
+                    fontWeight: 'bold',
+                    color: 'var(--tg-theme-accent-text-color, #007AFF)'
+                  }}>
+                    {product.price}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </Section>

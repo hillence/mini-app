@@ -1,6 +1,6 @@
 import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'; // Добавлено для состояния карусели
 
 import { Link } from '@/components/Link/Link.tsx';
 import { Page } from '@/components/Page.tsx';
@@ -15,18 +15,14 @@ const bannerImages = [
 ];
 
 const products = [
-  { id: 1, name: 'Кондиционер', price: '31 000 ₽', image: './tconditioner.png' },
+  { id: 1, name: 'Часы', price: '10K', image: 'https://example.com/watch.jpg' },
   { id: 2, name: 'Сумка', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
   { id: 3, name: 'Кроссовки', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
   { id: 4, name: 'Кофта', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
 ];
 
 export const IndexPage: FC = () => {
-  const navigate = useNavigate();
-
-  const handleProductClick = (product: typeof products[0]) => {
-    navigate('/product', { state: { product } });
-  };
+  const [currentSlide, setCurrentSlide] = useState(0); // Состояние для карусели
 
   return (
     <Page back={false}>
@@ -63,50 +59,22 @@ export const IndexPage: FC = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '12px',
-              padding: '0 8px',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '10px',
             }}
           >
             {products.map((product) => (
-              <div
-                key={product.id}
-                onClick={() => handleProductClick(product)}
-                style={{
-                  border: '1px solid var(--tg-theme-section-separator-color, #e0e0e0)',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
-                }}
-              >
-                <Image 
-                  src={product.image} 
-                  style={{ 
-                    width: '100%', 
-                    height: '120px', 
-                    objectFit: 'cover' 
-                  }} 
-                />
-                <div style={{ padding: '12px' }}>
-                  <h3 style={{ 
-                    margin: '0 0 4px 0', 
-                    fontSize: '14px', 
-                    fontWeight: '500',
-                    color: 'var(--tg-theme-text-color, #000000)'
-                  }}>
-                    {product.name}
-                  </h3>
-                  <p style={{ 
-                    margin: 0, 
-                    fontSize: '16px', 
-                    fontWeight: 'bold',
-                    color: 'var(--tg-theme-accent-text-color, #007AFF)'
-                  }}>
-                    {product.price}
-                  </p>
-                </div>
-              </div>
+              <Link key={product.id} to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
+                <Cell
+                  style={{
+                    padding: 0,
+                  }}
+                  before={<Image src={product.image} style={{ width: '100%', height: '100px', objectFit: 'cover' }} />}
+                  subtitle={product.price}
+                >
+                  {product.name}
+                </Cell>
+              </Link>
             ))}
           </div>
         </Section>

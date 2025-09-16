@@ -51,47 +51,15 @@ export const IndexPage: FC = () => {
         </div>
 
         {/* Новый раздел: Баннер с пролистыванием */}
-        <Section header="Акции" footer="Пролистайте для просмотра (2 пролистывания)">
-          <div
-            ref={scrollRef}
-            onScroll={handleScroll}
+        <Section header="Акции">
+          <Image
+            src={bannerImages[0]} // Static first image
             style={{
-              display: 'flex',
-              overflowX: 'scroll',
-              scrollSnapType: 'x mandatory',
-              gap: '10px',
-              padding: '10px 0',
+              width: '100%',
+              height: '150px',
+              objectFit: 'cover',
             }}
-          >
-            {bannerImages.map((src, index) => (
-              <Image
-                key={index}
-                src={src}
-                style={{
-                  width: '100%',
-                  height: '150px',
-                  objectFit: 'cover',
-                  scrollSnapAlign: 'start',
-                  flexShrink: 0,
-                }}
-              />
-            ))}
-          </div>
-          {/* Dots indicators */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
-            {bannerImages.map((_, index) => (
-              <div
-                key={index}
-                style={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  backgroundColor: currentSlide === index ? '#007AFF' : '#C7C7C7',
-                  margin: '0 4px',
-                }}
-              />
-            ))}
-          </div>
+          />
         </Section>
 
         {/* Новый раздел: Товары в два ряда */}
@@ -110,7 +78,7 @@ export const IndexPage: FC = () => {
                     padding: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'stretch', // Changed to stretch for left alignment
+                    alignItems: 'stretch',
                     minHeight: '220px',
                   }}
                 >

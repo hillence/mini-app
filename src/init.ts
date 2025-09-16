@@ -59,6 +59,14 @@ export function init(options: {
     });
   }
 
+  // Проверка версии Telegram Mini App
+  const WebApp = window.Telegram.WebApp;
+  const appVersion = parseFloat(WebApp.version);
+  const minVersion = 6.0;
+  if (isNaN(appVersion) || appVersion < minVersion) {
+    throw new Error(`Telegram client version ${WebApp.version} is too old. Please update to v6.0 or higher.`);
+  }
+
   // Mount all components used in the project.
   mountBackButton.ifAvailable();
   restoreInitData();

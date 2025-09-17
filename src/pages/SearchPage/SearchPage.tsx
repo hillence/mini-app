@@ -31,24 +31,12 @@ export const SearchPage: FC = () => {
   return (
     <Page back={true}>
       <div style={{ 
-        paddingTop: '146px',
-        backgroundColor: 'transparent',
-        fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+        backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
+        minHeight: '100vh',
+        fontFamily: 'var(--tg-font-family, -apple-system)'
       }}>
-        {/* Fixed Search Header */}
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '146px',
-          backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
-          zIndex: 1000,
-          display: 'flex',
-          alignItems: 'flex-end',
-          padding: '16px',
-          paddingBottom: '16px'
-        }}>
+        {/* Статичная поисковая строка */}
+        <Section style={{ backgroundColor: 'transparent', padding: 'var(--tg-spacing-l, 16px)' }}>
           <input
             type="text"
             placeholder="Поиск"
@@ -56,27 +44,29 @@ export const SearchPage: FC = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               width: '100%',
-              padding: '12px 16px',
-              borderRadius: '12px',
+              padding: 'var(--tg-spacing-m, 12px) var(--tg-spacing-l, 16px)',
+              borderRadius: 'var(--tg-border-radius, 12px)',
               border: 'none',
               backgroundColor: 'var(--tg-theme-secondary-bg-color, #F2F2F7)',
               fontSize: '17px',
-              fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif',
-              outline: 'none'
+              fontFamily: 'var(--tg-font-family, -apple-system)',
+              outline: 'none',
+              color: 'var(--tg-theme-text-color, #000)',
+              boxSizing: 'border-box'
             }}
             autoFocus
           />
-        </div>
+        </Section>
 
-        {/* Search Results */}
+        {/* Результаты поиска */}
         <Section style={{ backgroundColor: 'transparent', padding: '0' }}>
-          <div style={{ padding: '0 16px' }}>
+          <div style={{ padding: '0 var(--tg-spacing-l, 16px)' }}>
             {filteredProducts.length > 0 ? (
               <div
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '12px',
+                  gap: 'var(--tg-spacing-m, 12px)',
                   backgroundColor: 'transparent',
                 }}
               >
@@ -89,7 +79,7 @@ export const SearchPage: FC = () => {
                         alignItems: 'stretch',
                         minHeight: '300px',
                         backgroundColor: 'transparent',
-                        borderRadius: '12px',
+                        borderRadius: 'var(--tg-border-radius, 12px)',
                         overflow: 'hidden',
                       }}
                     >
@@ -97,7 +87,7 @@ export const SearchPage: FC = () => {
                         width: '100%', 
                         height: '230px',
                         overflow: 'hidden',
-                        borderRadius: '12px 12px 0 0',
+                        borderRadius: 'var(--tg-border-radius, 12px) var(--tg-border-radius, 12px) 0 0',
                       }}>
                         <Image 
                           src={product.image} 
@@ -110,14 +100,14 @@ export const SearchPage: FC = () => {
                       </div>
                       <div style={{ 
                         textAlign: 'left', 
-                        marginTop: '8px', 
-                        paddingLeft: '0px',
+                        marginTop: 'var(--tg-spacing-s, 8px)', 
                         backgroundColor: 'transparent',
                       }}>
                         <div style={{ 
                           fontSize: '16px', 
                           fontWeight: '500', 
-                          marginBottom: '4px'
+                          marginBottom: 'var(--tg-spacing-xs, 4px)',
+                          color: 'var(--tg-theme-text-color, #000)'
                         }}>
                           {product.name}
                         </div>
@@ -136,13 +126,20 @@ export const SearchPage: FC = () => {
             ) : (
               <div style={{ 
                 textAlign: 'center', 
-                padding: '40px 20px',
-                fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+                padding: 'var(--tg-spacing-xl, 24px)',
+                fontFamily: 'var(--tg-font-family, -apple-system)'
               }}>
-                <div style={{ fontSize: '17px', color: 'var(--tg-theme-hint-color, #8E8E93)' }}>
+                <div style={{ 
+                  fontSize: '17px', 
+                  color: 'var(--tg-theme-hint-color, #8E8E93)',
+                  marginBottom: 'var(--tg-spacing-s, 8px)'
+                }}>
                   Ничего не найдено
                 </div>
-                <div style={{ fontSize: '15px', color: 'var(--tg-theme-hint-color, #8E8E93)', marginTop: '8px' }}>
+                <div style={{ 
+                  fontSize: '15px', 
+                  color: 'var(--tg-theme-hint-color, #8E8E93)'
+                }}>
                   Попробуйте изменить запрос
                 </div>
               </div>

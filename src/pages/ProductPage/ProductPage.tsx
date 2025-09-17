@@ -16,76 +16,81 @@ export const ProductPage: FC = () => {
   const product = products.find(p => p.id === Number(id)); // Changed to Number for id match
 
   useEffect(() => {
-    const button = mountMainButton();
-    if (button) {
-      button.setText('Купить товар');
-      button.setBgColor('#007AFF');
-      button.onClick(() => console.log('Купить товар'));
-      button.show();
-    }
+    try {
+      const cleanup = mountMainButton.ifAvailable(() => {
+        const button = mountMainButton();
+        button.setText('Купить товар');
+        button.setBgColor('#007AFF');
+        button.onClick(() => console.log('Купить товар'));
+        button.show();
 
-    return () => {
-      if (button) {
-        button.hide();
-      }
-    };
+        return () => {
+          button.hide();
+        };
+      });
+      
+      return cleanup;
+    } catch (error) {
+      console.log('MainButton недоступен');
+    }
   }, []);
 
   if (!product) {
     return <Page><div>Товар не найден</div></Page>;
   }
 
-  return (
-    <Page>
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        height: '100vh',
-        backgroundColor: 'transparent',
-        padding: 0,
-        margin: 0
-      }}>
-        <Image
-          src={product.image}
-          style={{
-            width: '100%',
-            height: '60vh',
-            objectFit: 'cover',
-          }}
-        />
-        <Section style={{ backgroundColor: 'transparent', padding: '16px' }}>
-          <h2 style={{ 
+    return (
+      <Page back={true}>
+        <div style={{
+          backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
+          minHeight: '100vh',
+          fontFamily: 'var(--tg-font-family, -apple-system)'
+        }}>
+          <Image
+            src={product.image}
+            style={{
+              width: '100%',
+              height: '60vh',
+              objectFit: 'cover',
+            }}
+          />
+          <Section style={{ backgroundColor: 'transparent', padding: 'var(--tg-spacing-l, 16px)' }}>
+          <h1 style={{ 
             margin: 0, 
-            marginBottom: '8px', 
+            marginBottom: 'var(--tg-spacing-s, 8px)', 
             fontSize: '28px', 
             fontWeight: '700',
-            fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+            fontFamily: 'var(--tg-font-family, -apple-system)',
+            color: 'var(--tg-theme-text-color, #000)'
           }}>
             {product.name}
-          </h2>
+          </h1>
           <p style={{ 
             margin: 0, 
-            marginBottom: '16px', 
+            marginBottom: 'var(--tg-spacing-l, 16px)', 
             fontSize: '24px', 
             fontWeight: '600',
-            fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+            fontFamily: 'var(--tg-font-family, -apple-system)',
+            color: 'var(--tg-theme-text-color, #000)'
           }}>
             {product.price}
           </p>
-          <h3 style={{ 
+          <h2 style={{ 
             margin: 0, 
-            marginBottom: '8px', 
+            marginBottom: 'var(--tg-spacing-s, 8px)', 
             fontSize: '20px', 
             fontWeight: '600',
-            fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+            fontFamily: 'var(--tg-font-family, -apple-system)',
+            color: 'var(--tg-theme-text-color, #000)'
           }}>
             Описание товара
-          </h3>
+          </h2>
           <p style={{ 
             margin: 0, 
             fontSize: '17px', 
-            lineHeight: '22px',
-            fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif'
+            lineHeight: '1.4',
+            fontFamily: 'var(--tg-font-family, -apple-system)',
+            color: 'var(--tg-theme-text-color, #000)'
           }}>
             {product.description}
           </p>

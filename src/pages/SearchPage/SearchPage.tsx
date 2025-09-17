@@ -31,10 +31,10 @@ export const SearchPage: FC = () => {
   return (
     <Page back={true}>
       <div style={{ 
-        backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
+        backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
         minHeight: '100vh',
         fontFamily: 'var(--tg-font-family, -apple-system)',
-        paddingTop: '160px'
+        paddingTop: '110px'
       }}>
         {/* Статичная поисковая строка */}
         <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>

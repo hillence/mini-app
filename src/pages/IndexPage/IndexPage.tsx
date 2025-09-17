@@ -54,10 +54,10 @@ export const IndexPage: FC = () => {
   return (
     <Page back={false}>
       <div style={{
-        backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
+        backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
         minHeight: '100vh',
         fontFamily: 'var(--tg-font-family, -apple-system)',
-        paddingTop: '160px'
+        paddingTop: '110px'
       }}>
         {/* Статичная верхняя панель */}
         <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
@@ -93,9 +93,9 @@ export const IndexPage: FC = () => {
             overflowX: 'auto',
             paddingBottom: 'var(--tg-spacing-s, 8px)'
           }}>
-            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>🔍 Премиум</Button>
-            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>💎 Дешевле</Button>
-            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>🎯 Дороже</Button>
+            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>Премиум</Button>
+            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>Дешевле</Button>
+            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>Дороже</Button>
           </div>
         </Section>
 

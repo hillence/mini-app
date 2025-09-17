@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Section, Image } from '@telegram-apps/telegram-ui';
+import { Section, Image, Button } from '@telegram-apps/telegram-ui';
 import { Page } from '@/components/Page.tsx';
 import { mountMainButton } from '@telegram-apps/sdk-react';
 import { products } from '@/pages/IndexPage/IndexPage';
@@ -11,19 +11,19 @@ export const ProductPage: FC = () => {
 
   useEffect(() => {
     try {
-      const cleanup = mountMainButton.ifAvailable(() => {
-        const button = mountMainButton();
+      const button = mountMainButton();
+      if (button) {
         button.setText('Добавить в корзину');
-        button.setBgColor('var(--tg-theme-button-color, #007AFF)');
+        button.setBgColor('#007AFF');
         button.onClick(() => console.log('Добавить в корзину:', product?.name));
         button.show();
+      }
 
-        return () => {
+      return () => {
+        if (button) {
           button.hide();
-        };
-      });
-      
-      return cleanup;
+        }
+      };
     } catch (error) {
       console.log('MainButton недоступен');
     }
@@ -35,7 +35,8 @@ export const ProductPage: FC = () => {
         <div style={{ 
           padding: 'var(--tg-spacing-l, 16px)', 
           textAlign: 'center',
-          fontFamily: 'var(--tg-font-family, -apple-system)'
+          fontFamily: 'var(--tg-font-family, -apple-system)',
+          paddingTop: '110px'
         }}>
           Товар не найден
         </div>
@@ -48,17 +49,12 @@ export const ProductPage: FC = () => {
       <div style={{
         backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
         minHeight: '100vh',
-        fontFamily: 'var(--tg-font-family, -apple-system)'
+        fontFamily: 'var(--tg-font-family, -apple-system)',
+        paddingTop: '110px'
       }}>
-        {/* Белый отступ сверху */}
-        <div style={{ 
-          height: '20px', 
-          backgroundColor: 'var(--tg-theme-bg-color, #ffffff)' 
-        }} />
-        
         {/* Изображение товара */}
         <div style={{
-          width: '100%',
+          width: 'calc(100% - 32px)',
           height: '50vh',
           display: 'flex',
           alignItems: 'center',
@@ -109,7 +105,7 @@ export const ProductPage: FC = () => {
           </div>
 
           {/* Описание */}
-          <div>
+          <div style={{ marginBottom: 'var(--tg-spacing-l, 16px)' }}>
             <h2 style={{ 
               margin: 0, 
               marginBottom: 'var(--tg-spacing-s, 8px)', 
@@ -132,34 +128,32 @@ export const ProductPage: FC = () => {
             </p>
           </div>
 
-          {/* Дополнительная информация */}
-          <div style={{ 
-            marginTop: 'var(--tg-spacing-xl, 24px)',
-            padding: 'var(--tg-spacing-l, 16px)',
-            backgroundColor: 'var(--tg-theme-secondary-bg-color, #f8f9fa)',
-            borderRadius: 'var(--tg-border-radius, 12px)',
-            border: 'none'
-          }}>
-            <h3 style={{
-              margin: 0,
-              marginBottom: 'var(--tg-spacing-s, 8px)',
-              fontSize: '15px',
+          {/* Вопросы */}
+          <div style={{ marginBottom: 'var(--tg-spacing-xl, 24px)' }}>
+            <h3 style={{ 
+              margin: 0, 
+              marginBottom: 'var(--tg-spacing-s, 8px)', 
+              fontSize: '17px', 
               fontWeight: '600',
-              color: 'var(--tg-theme-text-color, #000)',
-              fontFamily: 'var(--tg-font-family, -apple-system)'
+              fontFamily: 'var(--tg-font-family, -apple-system)',
+              color: 'var(--tg-theme-text-color, #000)'
             }}>
-              Характеристики
+              Остались вопросы?
             </h3>
-            <div style={{
-              fontSize: '14px',
-              lineHeight: '1.4',
-              color: 'var(--tg-theme-hint-color, #8E8E93)',
-              fontFamily: 'var(--tg-font-family, -apple-system)'
-            }}>
-              • Гарантия: 2 года<br/>
-              • Доставка: 1-3 дня<br/>
-              • Возврат: 14 дней
-            </div>
+            
+            {/* Кнопка "Написать в поддержку" */}
+            <Button 
+              mode="outline" 
+              size="l"
+              style={{
+                width: '100%',
+                marginBottom: 'var(--tg-spacing-m, 12px)',
+                fontFamily: 'var(--tg-font-family, -apple-system)'
+              }}
+              onClick={() => console.log('Написать в поддержку')}
+            >
+              Написать в поддержку
+            </Button>
           </div>
 
           {/* Отступ снизу для MainButton */}

@@ -13,15 +13,16 @@ const bannerImages = [
 ];
 
 export const products = [
-  { id: 1, name: 'Кондиционер 1', price: '18 000 ₽', image: 'https://basket-16.wbbasket.ru/vol2546/part254650/254650733/images/big/1.webp', description: 'Мощный кондиционер для охлаждения больших помещений' },
-  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://example.com/bag.jpg', description: 'Компактный кондиционер для маленьких комнат' },
-  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg', description: 'Энергоэффективный кондиционер с низким уровнем шума' },
-  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://example.com/sweater.jpg', description: 'Бюджетный кондиционер для дачи' },
-  { id: 5, name: 'Кондиционер 5', price: '8 500 ₽', image: 'https://example.com/swрeater.jpg', description: 'Умный кондиционер с Wi-Fi управлением' },
+  { id: 1, name: 'Кондиционер 1', price: '18 000 ₽', image: 'https://basket-16.wbbasket.ru/vol2546/part254650/254650733/images/big/1.webp', description: 'Мощный кондиционер для охлаждения больших помещений', category: 'premium' },
+  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://example.com/bag.jpg', description: 'Компактный кондиционер для маленьких комнат', category: 'cheap' },
+  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg', description: 'Энергоэффективный кондиционер с низким уровнем шума', category: 'premium' },
+  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://example.com/sweater.jpg', description: 'Бюджетный кондиционер для дачи', category: 'cheap' },
+  { id: 5, name: 'Кондиционер 5', price: '8 500 ₽', image: 'https://example.com/swрeater.jpg', description: 'Умный кондиционер с Wi-Fi управлением', category: 'expensive' },
 ];
 
 export const IndexPage: FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const scrollRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -51,6 +52,11 @@ export const IndexPage: FC = () => {
     return () => clearInterval(interval);
   }, [currentSlide, bannerImages.length]);
 
+  // Фильтрация товаров по категории
+  const filteredProducts = selectedCategory === 'all' 
+    ? products 
+    : products.filter(product => product.category === selectedCategory);
+
   return (
     <Page back={false}>
       <div style={{
@@ -62,7 +68,7 @@ export const IndexPage: FC = () => {
         {/* Статичная верхняя панель */}
         <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--tg-spacing-l, 16px)' }}>
-            <IconButton mode="plain" size="s">
+            <IconButton mode="plain" size="s" onClick={() => navigate('/menu')}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--tg-theme-text-color, #000)">
                 <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
               </svg>
@@ -93,9 +99,30 @@ export const IndexPage: FC = () => {
             overflowX: 'auto',
             paddingBottom: 'var(--tg-spacing-s, 8px)'
           }}>
-            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>Премиум</Button>
-            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>Дешевле</Button>
-            <Button mode="outline" size="s" style={{ flexShrink: 0, fontSize: '15px' }}>Дороже</Button>
+            <Button 
+              mode={selectedCategory === 'premium' ? 'filled' : 'outline'} 
+              size="s" 
+              style={{ flexShrink: 0, fontSize: '15px' }}
+              onClick={() => setSelectedCategory(selectedCategory === 'premium' ? 'all' : 'premium')}
+            >
+              Премиум
+            </Button>
+            <Button 
+              mode={selectedCategory === 'cheap' ? 'filled' : 'outline'} 
+              size="s" 
+              style={{ flexShrink: 0, fontSize: '15px' }}
+              onClick={() => setSelectedCategory(selectedCategory === 'cheap' ? 'all' : 'cheap')}
+            >
+              Дешевле
+            </Button>
+            <Button 
+              mode={selectedCategory === 'expensive' ? 'filled' : 'outline'} 
+              size="s" 
+              style={{ flexShrink: 0, fontSize: '15px' }}
+              onClick={() => setSelectedCategory(selectedCategory === 'expensive' ? 'all' : 'expensive')}
+            >
+              Дороже
+            </Button>
           </div>
         </Section>
 
@@ -177,16 +204,31 @@ export const IndexPage: FC = () => {
             <div style={{
               width: '100%',
               height: '184px',
-              backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
+              backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
               borderRadius: 'var(--tg-border-radius, 12px)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              position: 'relative',
+              overflow: 'hidden'
             }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: 'url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                opacity: 0.3
+              }} />
               <span style={{ 
                 fontSize: '17px', 
                 fontWeight: '600',
-                color: 'var(--tg-theme-text-color, #000)'
+                color: '#ffffff',
+                position: 'relative',
+                zIndex: 1
               }}>
                 Раздел 1
               </span>
@@ -194,16 +236,31 @@ export const IndexPage: FC = () => {
             <div style={{
               width: '100%',
               height: '184px',
-              backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
+              backgroundImage: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
               borderRadius: 'var(--tg-border-radius, 12px)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              position: 'relative',
+              overflow: 'hidden'
             }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: 'url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&h=200&fit=crop")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                opacity: 0.3
+              }} />
               <span style={{ 
                 fontSize: '17px', 
                 fontWeight: '600',
-                color: 'var(--tg-theme-text-color, #000)'
+                color: '#ffffff',
+                position: 'relative',
+                zIndex: 1
               }}>
                 Раздел 2
               </span>
@@ -231,7 +288,7 @@ export const IndexPage: FC = () => {
                 backgroundColor: 'transparent',
               }}
             >
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <Link key={product.id} to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
                   <div
                     style={{

@@ -218,7 +218,7 @@ export const IndexPage: FC = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundImage: 'url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop")',
+                backgroundImage: 'url("https://',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 opacity: 0.3
@@ -252,7 +252,7 @@ export const IndexPage: FC = () => {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  backgroundImage: 'url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&h=200&fit=crop")',
+                  backgroundImage: 'url("https://',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   opacity: 0.3

@@ -8,6 +8,7 @@ import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
 import { ProductPage } from '@/pages/ProductPage/ProductPage';
 import { SearchPage } from '@/pages/SearchPage/SearchPage';
 import { MenuPage } from '@/pages/MenuPage/MenuPage';
+import { OrderPage } from '@/pages/OrderPage/OrderPage';
 
 interface Route {
   path: string;
@@ -47,4 +48,5 @@ export const routes: Route[] = [
   { path: '/product/:id', Component: ProductPage },
   { path: '/search', Component: SearchPage },
   { path: '/menu', Component: MenuPage },
+  { path: '/order', Component: OrderPage },
 ];

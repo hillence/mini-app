@@ -52,16 +52,11 @@ export const ProductPage: FC = () => {
         fontFamily: 'var(--tg-font-family, -apple-system)',
         paddingTop: '110px'
       }}>
-        {/* Изображение товара */}
+        {/* Изображение товара - без отступов и закруглений */}
         <div style={{
-          width: 'calc(100% - 32px)',
+          width: '100%',
           height: '50vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
-          margin: '0 var(--tg-spacing-l, 16px)',
-          borderRadius: 'var(--tg-border-radius, 12px)',
           overflow: 'hidden'
         }}>
           <Image
@@ -141,19 +136,33 @@ export const ProductPage: FC = () => {
               Остались вопросы?
             </h3>
             
-            {/* Кнопка "Написать в поддержку" */}
-            <Button 
-              mode="outline" 
-              size="l"
-              style={{
-                width: '100%',
-                marginBottom: 'var(--tg-spacing-m, 12px)',
-                fontFamily: 'var(--tg-font-family, -apple-system)'
-              }}
-              onClick={() => console.log('Написать в поддержку')}
-            >
-              Написать в поддержку
-            </Button>
+            {/* Кнопки */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--tg-spacing-m, 12px)' }}>
+              <Button 
+                mode="outline" 
+                size="l"
+                style={{
+                  width: '100%',
+                  fontFamily: 'var(--tg-font-family, -apple-system)'
+                }}
+                onClick={() => console.log('Написать в поддержку')}
+              >
+                Написать в поддержку
+              </Button>
+              
+              <Button 
+                mode="filled" 
+                size="l"
+                style={{
+                  width: '100%',
+                  fontFamily: 'var(--tg-font-family, -apple-system)',
+                  backgroundColor: 'var(--tg-theme-button-color, #007AFF)'
+                }}
+                onClick={() => console.log('Добавить в корзину:', product.name)}
+              >
+                В корзину
+              </Button>
+            </div>
           </div>
 
           {/* Отступ снизу для MainButton */}

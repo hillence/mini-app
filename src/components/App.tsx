@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from 'react';
 import { Navigate, Route, Routes, HashRouter } from 'react-router-dom';
-import { retrieveLaunchParams, useSignal, isMiniAppDark, requestFullscreen } from '@telegram-apps/sdk-react';
+import { retrieveLaunchParams, useSignal, isMiniAppDark, requestFullscreen, disableVerticalSwipes } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 
 import { routes } from '@/navigation/routes.tsx';
@@ -9,12 +9,13 @@ export function App() {
   const lp = useMemo(() => retrieveLaunchParams(), []);
   const isDark = useSignal(isMiniAppDark);
 
-  // Включить fullscreen режим при запуске приложения
+  // Включить fullscreen режим и заблокировать вертикальные свайпы
   useEffect(() => {
     try {
       requestFullscreen();
+      disableVerticalSwipes();
     } catch (error) {
-      console.log('Fullscreen не поддерживается или недоступен');
+      console.log('Fullscreen или disableVerticalSwipes не поддерживается');
     }
   }, []);
 

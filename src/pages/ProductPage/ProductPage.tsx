@@ -52,11 +52,16 @@ export const ProductPage: FC = () => {
         fontFamily: 'var(--tg-font-family, -apple-system)',
         paddingTop: '110px'
       }}>
-        {/* Изображение товара - без отступов и закруглений */}
+        {/* Изображение товара */}
         <div style={{
-          width: '100%',
+          width: 'calc(100% - 32px)',
           height: '50vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
+          margin: '0 var(--tg-spacing-l, 16px)',
+          borderRadius: 'var(--tg-border-radius, 12px)',
           overflow: 'hidden'
         }}>
           <Image
@@ -136,33 +141,19 @@ export const ProductPage: FC = () => {
               Остались вопросы?
             </h3>
             
-            {/* Кнопки */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--tg-spacing-m, 12px)' }}>
-              <Button 
-                mode="outline" 
-                size="l"
-                style={{
-                  width: '100%',
-                  fontFamily: 'var(--tg-font-family, -apple-system)'
-                }}
-                onClick={() => console.log('Написать в поддержку')}
-              >
-                Написать в поддержку
-              </Button>
-              
-              <Button 
-                mode="filled" 
-                size="l"
-                style={{
-                  width: '100%',
-                  fontFamily: 'var(--tg-font-family, -apple-system)',
-                  backgroundColor: 'var(--tg-theme-button-color, #007AFF)'
-                }}
-                onClick={() => console.log('Добавить в корзину:', product.name)}
-              >
-                В корзину
-              </Button>
-            </div>
+            {/* Кнопка "Написать в поддержку" */}
+            <Button 
+              mode="outline" 
+              size="l"
+              style={{
+                width: '100%',
+                marginBottom: 'var(--tg-spacing-m, 12px)',
+                fontFamily: 'var(--tg-font-family, -apple-system)'
+              }}
+              onClick={() => console.log('Написать в поддержку')}
+            >
+              Написать в поддержку
+            </Button>
           </div>
 
           {/* Отступ снизу для MainButton */}

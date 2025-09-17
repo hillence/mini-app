@@ -233,41 +233,38 @@ export const IndexPage: FC = () => {
                 Раздел 1
               </span>
             </div>
-            <Link to="/order" style={{ textDecoration: 'none' }}>
+            <div style={{
+              width: '100%',
+              height: '184px',
+              backgroundImage: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+              borderRadius: 'var(--tg-border-radius, 12px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
               <div style={{
-                width: '100%',
-                height: '184px',
-                backgroundImage: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                borderRadius: 'var(--tg-border-radius, 12px)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: 'url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&h=200&fit=crop")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                opacity: 0.3
+              }} />
+              <span style={{ 
+                fontSize: '17px', 
+                fontWeight: '600',
+                color: '#ffffff',
                 position: 'relative',
-                overflow: 'hidden',
-                cursor: 'pointer'
+                zIndex: 1
               }}>
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundImage: 'url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&h=200&fit=crop")',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  opacity: 0.3
-                }} />
-                <span style={{ 
-                  fontSize: '17px', 
-                  fontWeight: '600',
-                  color: '#ffffff',
-                  position: 'relative',
-                  zIndex: 1
-                }}>
-                  Заказать услугу
-                </span>
-              </div>
-            </Link>
+                Раздел 2
+              </span>
+            </div>
           </div>
         </Section>
 

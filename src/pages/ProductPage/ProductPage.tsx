@@ -42,7 +42,7 @@ export const ProductPage: FC = () => {
     return (
       <Page back={true}>
         <div style={{
-          backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
+          backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
           minHeight: '100vh',
           fontFamily: 'var(--tg-font-family, -apple-system)'
         }}>
@@ -54,7 +54,7 @@ export const ProductPage: FC = () => {
               objectFit: 'cover',
             }}
           />
-          <Section style={{ backgroundColor: 'transparent', padding: 'var(--tg-spacing-l, 16px)' }}>
+          <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
           <h1 style={{ 
             margin: 0, 
             marginBottom: 'var(--tg-spacing-s, 8px)', 

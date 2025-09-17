@@ -31,12 +31,13 @@ export const SearchPage: FC = () => {
   return (
     <Page back={true}>
       <div style={{ 
-        backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
+        backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
         minHeight: '100vh',
-        fontFamily: 'var(--tg-font-family, -apple-system)'
+        fontFamily: 'var(--tg-font-family, -apple-system)',
+        paddingTop: '160px'
       }}>
         {/* Статичная поисковая строка */}
-        <Section style={{ backgroundColor: 'transparent', padding: 'var(--tg-spacing-l, 16px)' }}>
+        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
           <input
             type="text"
             placeholder="Поиск"
@@ -59,7 +60,7 @@ export const SearchPage: FC = () => {
         </Section>
 
         {/* Результаты поиска */}
-        <Section style={{ backgroundColor: 'transparent', padding: '0' }}>
+        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: '0', border: 'none' }}>
           <div style={{ padding: '0 var(--tg-spacing-l, 16px)' }}>
             {filteredProducts.length > 0 ? (
               <div

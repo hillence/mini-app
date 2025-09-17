@@ -54,18 +54,31 @@ export const IndexPage: FC = () => {
   return (
     <Page back={false}>
       <div style={{
-        backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
+        backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
         minHeight: '100vh',
-        fontFamily: 'var(--tg-font-family, -apple-system)'
+        fontFamily: 'var(--tg-font-family, -apple-system)',
+        paddingTop: '160px'
       }}>
         {/* Статичная верхняя панель */}
-        <Section style={{ backgroundColor: 'transparent', padding: 'var(--tg-spacing-l, 16px)' }}>
+        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--tg-spacing-l, 16px)' }}>
             <IconButton mode="plain" size="s">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--tg-theme-text-color, #000)">
                 <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
               </svg>
             </IconButton>
+            
+            {/* Логотип по центру */}
+            <img 
+              src="https://cdn.prod.website-files.com/68ca28d130f45cfc8a33cc46/68ca28f6f0ae177bce7a9389_Group%203.svg" 
+              alt="Logo"
+              style={{
+                width: '124px',
+                height: '32px',
+                objectFit: 'contain'
+              }}
+            />
+            
             <IconButton mode="plain" size="s" onClick={() => navigate('/search')}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--tg-theme-text-color, #000)">
                 <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
@@ -87,7 +100,7 @@ export const IndexPage: FC = () => {
         </Section>
 
         {/* Баннер с акциями */}
-        <Section style={{ backgroundColor: 'transparent', padding: '0', marginBottom: 'var(--tg-spacing-l, 16px)' }}>
+        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: '0', marginBottom: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
           <h2 style={{ 
             padding: '0 var(--tg-spacing-l, 16px)', 
             margin: 'var(--tg-spacing-l, 16px) 0 var(--tg-spacing-s, 8px) 0', 
@@ -155,7 +168,7 @@ export const IndexPage: FC = () => {
         </Section>
 
         {/* Промо секции между Акциями и Товарами */}
-        <Section style={{ backgroundColor: 'transparent', padding: 'var(--tg-spacing-l, 16px)' }}>
+        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
@@ -199,7 +212,7 @@ export const IndexPage: FC = () => {
         </Section>
 
         {/* Товары */}
-        <Section style={{ backgroundColor: 'transparent', padding: '0' }}>
+        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: '0', border: 'none' }}>
           <h2 style={{ 
             padding: '0 var(--tg-spacing-l, 16px)', 
             margin: 'var(--tg-spacing-l, 16px) 0 var(--tg-spacing-s, 8px) 0', 

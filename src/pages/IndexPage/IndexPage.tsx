@@ -1,4 +1,4 @@
-import { Section, Cell, Image, List, IconButton } from '@telegram-apps/telegram-ui'; // Added IconButton
+import { Section, Cell, Image, List, IconButton, Button } from '@telegram-apps/telegram-ui'; // Added IconButton
 import type { FC } from 'react';
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -30,19 +30,48 @@ export const IndexPage: FC = () => {
 
   const handleScroll = () => {
     if (scrollRef.current) {
-      const slideWidth = scrollRef.current.clientWidth;
+      const slideWidth = scrollRef.current.clientWidth - 32;
       const scrollLeft = scrollRef.current.scrollLeft;
       setCurrentSlide(Math.round(scrollLeft / slideWidth));
     }
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const nextSlide = (currentSlide + 1) % bannerImages.length;
+        const slideWidth = scrollRef.current.clientWidth - 32;
+        scrollRef.current.scrollTo({
+          left: nextSlide * slideWidth,
+          behavior: 'smooth'
+        });
+        setCurrentSlide(nextSlide);
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentSlide, bannerImages.length]);
+
   return (
     <Page back={false}>
-      <List>
+      <div style={{ paddingTop: '146px' }}>
         {/* Top bar with menu and search */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px' }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          padding: '8px 16px',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: '#F2F2F7',
+          zIndex: 1000,
+          height: '146px',
+          alignItems: 'flex-end',
+          paddingBottom: '16px'
+        }}>
           <IconButton mode="plain" size="s">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"> {/* Icon28Menu placeholder */}
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
             </svg>
           </IconButton>
@@ -51,6 +80,51 @@ export const IndexPage: FC = () => {
               <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
             </svg>
           </IconButton>
+        </div>
+
+        {/* Category buttons */}
+        <div style={{ 
+          display: 'flex', 
+          gap: '8px', 
+          padding: '0 16px', 
+          marginBottom: '16px',
+          overflowX: 'auto'
+        }}>
+          <Button mode="outline" size="s">🔍 Премиум</Button>
+          <Button mode="outline" size="s">💎 Дешевле</Button>
+          <Button mode="outline" size="s">🎯 Дороже</Button>
+        </div>
+
+        {/* Two promotional sections */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '8px',
+          padding: '0 16px',
+          marginBottom: '16px'
+        }}>
+          <div style={{
+            width: '100%',
+            height: '184px',
+            backgroundColor: '#E3F2FD',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <span style={{ fontSize: '16px', fontWeight: '600' }}>Раздел 1</span>
+          </div>
+          <div style={{
+            width: '100%',
+            height: '184px',
+            backgroundColor: '#F3E5F5',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <span style={{ fontSize: '16px', fontWeight: '600' }}>Раздел 2</span>
+          </div>
         </div>
 
         {/* Новый раздел: Баннер с пролистыванием */}
@@ -64,8 +138,10 @@ export const IndexPage: FC = () => {
               overflowX: 'scroll',
               scrollSnapType: 'x mandatory',
               gap: '0px',
-              padding: '0',
+              padding: '0 16px',
               margin: '0',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
             }}
           >
             {bannerImages.map((src, index) => (
@@ -83,29 +159,29 @@ export const IndexPage: FC = () => {
             ))}
           </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px', backgroundColor: 'transparent' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px', backgroundColor: 'transparent', padding: '0 16px' }}>
           {bannerImages.map((_, index) => (
             <div
               key={index}
               style={{
-                width: '8px',
-                height: '8px',
+                width: '6px',
+                height: '6px',
                 borderRadius: '50%',
                 backgroundColor: currentSlide === index ? '#007AFF' : '#C7C7C7',
-                margin: '0 4px',
+                margin: '0 3px',
               }}
             />
           ))}
         </div>
 
         {/* Новый раздел: Товары в два ряда */}
-        <div style={{ backgroundColor: 'transparent', marginTop: '146px' }}>
+        <div style={{ backgroundColor: 'transparent' }}>
           <h2 style={{ padding: '0 16px', margin: '16px 0 8px 0', fontSize: '17px', fontWeight: '600', fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif' }}>ТОВАРЫ</h2>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '8px',
+              gap: '12px',
               padding: '0 16px',
               backgroundColor: 'transparent',
             }}
@@ -152,23 +228,7 @@ export const IndexPage: FC = () => {
             ))}
           </div>
         </div>
-
-        {/* Существующий контент (оставлен для совместимости) */}
-        <Section
-          header="Features"
-          footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
-        >
-          <Link to="/ton-connect">
-            <Cell
-              before={<Image src={tonSvg} style={{ backgroundColor: '#007AFF' }}/>}
-              subtitle="Connect your TON wallet"
-            >
-              TON Connect
-            </Cell>
-          </Link>
-        </Section>
-        {/* ... остальные Section ... */}
-      </List>
+      </div>
     </Page>
   );
 };

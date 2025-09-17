@@ -37,41 +37,40 @@ export const SearchPage: FC = () => {
       }}>
         {/* Search Header */}
         <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          padding: '12px 16px',
-          backgroundColor: 'transparent',
-          borderBottom: '1px solid #E5E5EA'
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '146px',
+          backgroundColor: '#F2F2F7',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'flex-end',
+          padding: '16px',
+          paddingBottom: '16px'
         }}>
-          <IconButton mode="plain" size="s" onClick={() => navigate('/')}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-            </svg>
-          </IconButton>
-          
-          <div style={{ flex: 1, marginLeft: '12px' }}>
-            <input
-              type="text"
-              placeholder="Поиск"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '12px 16px',
-                borderRadius: '12px',
-                border: 'none',
-                backgroundColor: '#F2F2F7',
-                fontSize: '17px',
-                fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif',
-                outline: 'none'
-              }}
-              autoFocus
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Поиск"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px 16px',
+              borderRadius: '12px',
+              border: 'none',
+              backgroundColor: '#FFFFFF',
+              fontSize: '17px',
+              fontFamily: 'SF Pro Text, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Arial, sans-serif',
+              outline: 'none',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}
+            autoFocus
+          />
         </div>
 
         {/* Search Results */}
-        <div style={{ padding: '16px', backgroundColor: 'transparent' }}>
+        <div style={{ padding: '16px', backgroundColor: 'transparent', paddingTop: '162px' }}>
           {filteredProducts.length > 0 ? (
             <div
               style={{

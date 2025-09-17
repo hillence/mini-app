@@ -204,7 +204,7 @@ export const IndexPage: FC = () => {
             <div style={{
               width: '100%',
               height: '184px',
-              backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              backgroundImage: 'linear-gradient(135deg, #808080ff 0%, #808080ff 100%)',
               borderRadius: 'var(--tg-border-radius, 12px)',
               display: 'flex',
               alignItems: 'center',
@@ -230,14 +230,14 @@ export const IndexPage: FC = () => {
                 position: 'relative',
                 zIndex: 1
               }}>
-                Раздел 1
+                УСТАНОВКА
               </span>
             </div>
             <Link to="/order" style={{ textDecoration: 'none' }}>
               <div style={{
                 width: '100%',
                 height: '184px',
-                backgroundImage: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                backgroundImage: 'linear-gradient(135deg, #808080ff 0%, #808080ff 100%)',
                 borderRadius: 'var(--tg-border-radius, 12px)',
                 display: 'flex',
                 alignItems: 'center',
@@ -264,7 +264,7 @@ export const IndexPage: FC = () => {
                   position: 'relative',
                   zIndex: 1
                 }}>
-                  Заказать услугу
+                  РЕМОНТ И ОБСЛУЖИВАНИЕ
                 </span>
               </div>
             </Link>

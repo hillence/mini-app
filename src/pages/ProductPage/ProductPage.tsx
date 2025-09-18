@@ -1,15 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { 
-  Section, 
-  Image, 
-  Button, 
-  List, 
-  Cell,
-  Title,
-  Text,
-  Divider
-} from '@telegram-apps/telegram-ui';
+import { Section, Image, Button } from '@telegram-apps/telegram-ui';
 import { Page } from '@/components/Page.tsx';
 import { mountMainButton } from '@telegram-apps/sdk-react';
 import { products } from '@/pages/IndexPage/IndexPage';
@@ -44,120 +35,143 @@ export const ProductPage: FC = () => {
   if (!product) {
     return (
       <Page back={true}>
-        <Section>
-          <Cell>
-            <Text>Товар не найден</Text>
-          </Cell>
-        </Section>
+        <div style={{ 
+          padding: 'var(--tg-spacing-l, 16px)', 
+          textAlign: 'center',
+          fontFamily: 'var(--tg-font-family, -apple-system)',
+          paddingTop: '110px'
+        }}>
+          Товар не найден
+        </div>
       </Page>
     );
   }
 
   return (
     <Page back={true}>
-      {/* Product Image - Full Width, No Margins */}
       <div style={{
-        width: '100%',
-        height: '50vh',
-        backgroundColor: 'var(--tg-theme-secondary-bg-color)',
-        overflow: 'hidden'
+        backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
+        minHeight: '100vh',
+        fontFamily: 'var(--tg-font-family, -apple-system)',
+        paddingTop: '110px'
       }}>
-        <Image
-          src={product.image}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }}
-        />
-      </div>
+        {/* Изображение товара - без отступов и закруглений */}
+        <div style={{
+          width: '100%',
+          height: '50vh',
+          backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
+          overflow: 'hidden'
+        }}>
+          <Image
+            src={product.image}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </div>
 
-      {/* Product Information */}
-      <List>
-        <Section>
-          <Cell>
-            <Title level="1" style={{ 
-              fontSize: '28px',
-              fontWeight: '700',
-              marginBottom: 'var(--tg-spacing-s)',
-              color: 'var(--tg-theme-text-color)'
+        {/* Информация о товаре */}
+        <Section style={{ 
+          backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', 
+          padding: 'var(--tg-spacing-l, 16px)', 
+          border: 'none',
+          marginTop: 'var(--tg-spacing-l, 16px)'
+        }}>
+          {/* Название и цена */}
+          <div style={{ marginBottom: 'var(--tg-spacing-l, 16px)' }}>
+            <h1 style={{ 
+              margin: 0, 
+              marginBottom: 'var(--tg-spacing-s, 8px)', 
+              fontSize: '24px', 
+              fontWeight: '600',
+              fontFamily: 'var(--tg-font-family, -apple-system)',
+              color: 'var(--tg-theme-text-color, #000)',
+              lineHeight: '1.2'
             }}>
               {product.name}
-            </Title>
-            <Text style={{
-              fontSize: '24px',
-              fontWeight: '600',
-              color: 'var(--tg-theme-text-color)'
+            </h1>
+            <div style={{ 
+              fontSize: '20px', 
+              fontWeight: '700',
+              fontFamily: 'var(--tg-font-family, -apple-system)',
+              color: 'var(--tg-theme-text-color, #000)'
             }}>
               {product.price}
-            </Text>
-          </Cell>
-        </Section>
+            </div>
+          </div>
 
-        <Divider />
-
-        {/* Product Description */}
-        <Section header="Описание товара">
-          <Cell>
-            <Text style={{
-              fontSize: '17px',
+          {/* Описание */}
+          <div style={{ marginBottom: 'var(--tg-spacing-l, 16px)' }}>
+            <h2 style={{ 
+              margin: 0, 
+              marginBottom: 'var(--tg-spacing-s, 8px)', 
+              fontSize: '17px', 
+              fontWeight: '600',
+              fontFamily: 'var(--tg-font-family, -apple-system)',
+              color: 'var(--tg-theme-text-color, #000)'
+            }}>
+              Описание товара
+            </h2>
+            <p style={{ 
+              margin: 0, 
+              fontSize: '15px', 
               lineHeight: '1.4',
-              color: 'var(--tg-theme-text-color)'
+              fontFamily: 'var(--tg-font-family, -apple-system)',
+              color: 'var(--tg-theme-text-color, #000)',
+              opacity: 0.8
             }}>
               {product.description}
-            </Text>
-          </Cell>
-        </Section>
+            </p>
+          </div>
 
-        <Divider />
-
-        {/* Product Specifications */}
-        <Section header="Характеристики">
-          <Cell>
-            <Text style={{
-              fontSize: '17px',
-              lineHeight: '1.4',
-              color: 'var(--tg-theme-text-color)'
+          {/* Вопросы */}
+          <div style={{ marginBottom: 'var(--tg-spacing-xl, 24px)' }}>
+            <h3 style={{ 
+              margin: 0, 
+              marginBottom: 'var(--tg-spacing-s, 8px)', 
+              fontSize: '17px', 
+              fontWeight: '600',
+              fontFamily: 'var(--tg-font-family, -apple-system)',
+              color: 'var(--tg-theme-text-color, #000)'
             }}>
-              Вес: 5 кг, Мощность: 2.5 кВт, Цвет: Белый
-            </Text>
-          </Cell>
-        </Section>
-
-        <Divider />
-
-        {/* Questions Section */}
-        <Section header="Остались вопросы?">
-          <Cell>
-            <Button 
-              mode="outline" 
-              size="l"
-              style={{
-                width: '100%',
-                marginBottom: 'var(--tg-spacing-m)'
-              }}
-              onClick={() => console.log('Написать в поддержку')}
-            >
-              Написать в поддержку
-            </Button>
+              Остались вопросы?
+            </h3>
             
-            <Button 
-              mode="filled" 
-              size="l"
-              style={{
-                width: '100%',
-                backgroundColor: 'var(--tg-theme-button-color)'
-              }}
-              onClick={() => console.log('Добавить в корзину:', product.name)}
-            >
-              В корзину
-            </Button>
-          </Cell>
-        </Section>
+            {/* Кнопки */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--tg-spacing-m, 12px)' }}>
+              <Button 
+                mode="outline" 
+                size="l"
+                style={{
+                  width: '100%',
+                  fontFamily: 'var(--tg-font-family, -apple-system)'
+                }}
+                onClick={() => console.log('Написать в поддержку')}
+              >
+                Написать в поддержку
+              </Button>
+              
+              <Button 
+                mode="filled" 
+                size="l"
+                style={{
+                  width: '100%',
+                  fontFamily: 'var(--tg-font-family, -apple-system)',
+                  backgroundColor: 'var(--tg-theme-button-color, #007AFF)'
+                }}
+                onClick={() => console.log('Добавить в корзину:', product.name)}
+              >
+                В корзину
+              </Button>
+            </div>
+          </div>
 
-        {/* Bottom spacing for MainButton */}
-        <div style={{ height: '80px' }} />
-      </List>
+          {/* Отступ снизу для MainButton */}
+          <div style={{ height: '80px' }} />
+        </Section>
+      </div>
     </Page>
   );
 };

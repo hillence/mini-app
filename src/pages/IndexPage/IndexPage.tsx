@@ -1,4 +1,13 @@
-import { Section, Image, IconButton, Button } from '@telegram-apps/telegram-ui';
+import { 
+  Section, 
+  Image, 
+  IconButton, 
+  Button,
+  List,
+  Cell,
+  Title,
+  Caption
+} from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -59,294 +68,236 @@ export const IndexPage: FC = () => {
 
   return (
     <Page back={false}>
-      <div style={{
-        backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
-        minHeight: '100vh',
-        fontFamily: 'var(--tg-font-family, -apple-system)',
-        paddingTop: '110px'
-      }}>
-        {/* Статичная верхняя панель */}
-        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--tg-spacing-l, 16px)' }}>
-            <IconButton mode="plain" size="s" onClick={() => navigate('/menu')}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--tg-theme-text-color, #000)">
-                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-              </svg>
-            </IconButton>
-            
-            {/* Логотип по центру */}
-            <img 
-              src="https://cdn.prod.website-files.com/68ca28d130f45cfc8a33cc46/68ca28f6f0ae177bce7a9389_Group%203.svg" 
-              alt="Logo"
+      {/* Верхняя навигация */}
+      <Section>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          padding: 'var(--tg-spacing-m)'
+        }}>
+          <IconButton mode="plain" size="s" onClick={() => navigate('/menu')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--tg-theme-text-color)">
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+          </IconButton>
+          
+          <Image
+            src="https://cdn.prod.website-files.com/68ca28d130f45cfc8a33cc46/68ca28f6f0ae177bce7a9389_Group%203.svg"
+            style={{ width: '124px', height: '32px', objectFit: 'contain' }}
+          />
+          
+          <IconButton mode="plain" size="s" onClick={() => navigate('/search')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--tg-theme-text-color)">
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+          </IconButton>
+        </div>
+
+        {/* Категории */}
+        <div style={{
+          display: 'flex',
+          gap: 'var(--tg-spacing-s)',
+          overflowX: 'auto',
+          padding: '0 var(--tg-spacing-m) var(--tg-spacing-m)',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}>
+          <Button
+            mode={selectedCategory === 'premium' ? 'filled' : 'outline'}
+            size="s"
+            onClick={() => setSelectedCategory(selectedCategory === 'premium' ? 'all' : 'premium')}
+          >
+            Премиум
+          </Button>
+          <Button
+            mode={selectedCategory === 'cheap' ? 'filled' : 'outline'}
+            size="s"
+            onClick={() => setSelectedCategory(selectedCategory === 'cheap' ? 'all' : 'cheap')}
+          >
+            Дешевле
+          </Button>
+          <Button
+            mode={selectedCategory === 'expensive' ? 'filled' : 'outline'}
+            size="s"
+            onClick={() => setSelectedCategory(selectedCategory === 'expensive' ? 'all' : 'expensive')}
+          >
+            Дороже
+          </Button>
+        </div>
+      </Section>
+
+      {/* Баннер с акциями */}
+      <Section header="АКЦИИ">
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          style={{
+            display: 'flex',
+            overflowX: 'auto',
+            scrollSnapType: 'x mandatory',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            borderRadius: 'var(--tg-border-radius)'
+          }}
+        >
+          {bannerImages.map((src, index) => (
+            <Image
+              key={index}
+              src={src}
               style={{
-                width: '124px',
-                height: '32px',
-                objectFit: 'contain'
+                width: '100%',
+                height: '200px',
+                objectFit: 'cover',
+                scrollSnapAlign: 'start',
+                flexShrink: 0
               }}
             />
-            
-            <IconButton mode="plain" size="s" onClick={() => navigate('/search')}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--tg-theme-text-color, #000)">
-                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-              </svg>
-            </IconButton>
-          </div>
-          
-          {/* Статичные кнопки категорий */}
-          <div style={{
-            display: 'flex',
-            gap: 'var(--tg-spacing-s, 8px)',
-            overflowX: 'auto',
-            paddingBottom: 'var(--tg-spacing-s, 8px)'
-          }}>
-            <Button 
-              mode={selectedCategory === 'premium' ? 'filled' : 'outline'} 
-              size="s" 
-              style={{ flexShrink: 0, fontSize: '15px' }}
-              onClick={() => setSelectedCategory(selectedCategory === 'premium' ? 'all' : 'premium')}
-            >
-              Премиум
-            </Button>
-            <Button 
-              mode={selectedCategory === 'cheap' ? 'filled' : 'outline'} 
-              size="s" 
-              style={{ flexShrink: 0, fontSize: '15px' }}
-              onClick={() => setSelectedCategory(selectedCategory === 'cheap' ? 'all' : 'cheap')}
-            >
-              Дешевле
-            </Button>
-            <Button 
-              mode={selectedCategory === 'expensive' ? 'filled' : 'outline'} 
-              size="s" 
-              style={{ flexShrink: 0, fontSize: '15px' }}
-              onClick={() => setSelectedCategory(selectedCategory === 'expensive' ? 'all' : 'expensive')}
-            >
-              Дороже
-            </Button>
-          </div>
-        </Section>
+          ))}
+        </div>
+        
+        {/* Индикаторы */}
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          marginTop: 'var(--tg-spacing-s)',
+          gap: 'var(--tg-spacing-xs)'
+        }}>
+          {bannerImages.map((_, index) => (
+            <div
+              key={index}
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: currentSlide === index ? 
+                  'var(--tg-theme-button-color)' : 
+                  'var(--tg-theme-hint-color)'
+              }}
+            />
+          ))}
+        </div>
+      </Section>
 
-        {/* Баннер с акциями */}
-        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: '0', marginBottom: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
-          <h2 style={{ 
-            padding: '0 var(--tg-spacing-l, 16px)', 
-            margin: 'var(--tg-spacing-l, 16px) 0 var(--tg-spacing-s, 8px) 0', 
-            fontSize: '17px', 
-            fontWeight: '600',
-            color: 'var(--tg-theme-text-color, #000)'
-          }}>
-            АКЦИИ
-          </h2>
-          <div
-            ref={scrollRef}
-            onScroll={handleScroll}
+      {/* Услуги */}
+      <Section>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: 'var(--tg-spacing-m)'
+        }}>
+          <Cell
             style={{
-              display: 'flex',
-              overflowX: 'auto',
-              scrollSnapType: 'x mandatory',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
-          >
-            {bannerImages.map((src, index) => (
-              <div
-                key={index}
-                style={{
-                  width: '100%',
-                  height: '200px',
-                  flexShrink: 0,
-                  scrollSnapAlign: 'start',
-                  padding: '0 var(--tg-spacing-l, 16px)',
-                  boxSizing: 'border-box'
-                }}
-              >
-                <Image
-                  src={src}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    borderRadius: 'var(--tg-border-radius, 12px)'
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            marginTop: 'var(--tg-spacing-m, 12px)' 
-          }}>
-            {bannerImages.map((_, index) => (
-              <div
-                key={index}
-                style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  backgroundColor: currentSlide === index ? 
-                    'var(--tg-theme-button-color, #007AFF)' : 
-                    'var(--tg-theme-hint-color, #8E8E93)',
-                  margin: '0 3px',
-                }}
-              />
-            ))}
-          </div>
-        </Section>
-
-        {/* Промо секции между Акциями и Товарами */}
-        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 'var(--tg-spacing-s, 8px)'
-          }}>
-            <div style={{
-              width: '100%',
-              height: '184px',
-              backgroundImage: 'linear-gradient(135deg, #808080ff 0%, #808080ff 100%)',
-              borderRadius: 'var(--tg-border-radius, 12px)',
+              height: '120px',
+              backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: 'var(--tg-border-radius)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden'
+              border: 'none',
+              padding: 0
+            }}
+          >
+            <Caption style={{ 
+              color: '#ffffff',
+              fontWeight: '600',
+              textAlign: 'center'
             }}>
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundImage: 'url("https://',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                opacity: 0.3
-              }} />
-              <span style={{ 
-                fontSize: '17px', 
-                fontWeight: '600',
-                color: '#ffffff',
-                position: 'relative',
-                zIndex: 1
-              }}>
-                УСТАНОВКА
-              </span>
-            </div>
-            <Link to="/order" style={{ textDecoration: 'none' }}>
-              <div style={{
-                width: '100%',
-                height: '184px',
-                backgroundImage: 'linear-gradient(135deg, #808080ff 0%, #808080ff 100%)',
-                borderRadius: 'var(--tg-border-radius, 12px)',
+              УСТАНОВКА
+            </Caption>
+          </Cell>
+          
+          <Link to="/order" style={{ textDecoration: 'none' }}>
+            <Cell
+              style={{
+                height: '120px',
+                backgroundImage: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                borderRadius: 'var(--tg-border-radius)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                position: 'relative',
-                overflow: 'hidden',
+                border: 'none',
+                padding: 0,
                 cursor: 'pointer'
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundImage: 'url("https://',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  opacity: 0.3
-                }} />
-                <span style={{ 
-                  fontSize: '17px', 
-                  fontWeight: '600',
-                  color: '#ffffff',
-                  position: 'relative',
-                  zIndex: 1
-                }}>
-                  РЕМОНТ И ОБСЛУЖИВАНИЕ
-                </span>
-              </div>
-            </Link>
-          </div>
-        </Section>
-
-        {/* Товары */}
-        <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: '0', border: 'none' }}>
-          <h2 style={{ 
-            padding: '0 var(--tg-spacing-l, 16px)', 
-            margin: 'var(--tg-spacing-l, 16px) 0 var(--tg-spacing-s, 8px) 0', 
-            fontSize: '17px', 
-            fontWeight: '600',
-            color: 'var(--tg-theme-text-color, #000)'
-          }}>
-            ТОВАРЫ
-          </h2>
-          <div style={{ padding: '0 var(--tg-spacing-l, 16px)' }}>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: 'var(--tg-spacing-m, 12px)',
-                backgroundColor: 'transparent',
               }}
             >
-              {filteredProducts.map((product) => (
-                <Link key={product.id} to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                  <div
+              <Caption style={{ 
+                color: '#ffffff',
+                fontWeight: '600',
+                textAlign: 'center'
+              }}>
+                РЕМОНТ И ОБСЛУЖИВАНИЕ
+              </Caption>
+            </Cell>
+          </Link>
+        </div>
+      </Section>
+
+      {/* Товары */}
+      <Section header="ТОВАРЫ">
+        <List>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: 'var(--tg-spacing-m)'
+          }}>
+            {filteredProducts.map((product) => (
+              <Link key={product.id} to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
+                <Cell
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minHeight: '280px',
+                    border: 'none',
+                    borderRadius: 'var(--tg-border-radius)',
+                    overflow: 'hidden',
+                    padding: 0
+                  }}
+                >
+                  <Image
+                    src={product.image}
                     style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'stretch',
-                      minHeight: '300px',
-                      backgroundColor: 'transparent',
-                      borderRadius: 'var(--tg-border-radius, 12px)',
-                      overflow: 'hidden',
+                      width: '100%',
+                      height: '200px',
+                      objectFit: 'cover'
                     }}
-                  >
-                    <div style={{ 
-                      width: '100%', 
-                      height: '230px',
-                      overflow: 'hidden',
-                      borderRadius: 'var(--tg-border-radius, 12px) var(--tg-border-radius, 12px) 0 0',
+                  />
+                  <div style={{ padding: 'var(--tg-spacing-s)' }}>
+                    <Title level="3" style={{ 
+                      fontSize: '16px',
+                      marginBottom: 'var(--tg-spacing-xs)'
                     }}>
-                      <Image 
-                        src={product.image} 
-                        style={{ 
-                          width: '100%', 
-                          height: '100%',
-                          objectFit: 'cover',
-                        }} 
-                      />
-                    </div>
-                    <div style={{ 
-                      textAlign: 'left', 
-                      marginTop: 'var(--tg-spacing-s, 8px)', 
-                      backgroundColor: 'transparent',
+                      {product.name}
+                    </Title>
+                    <Caption style={{ 
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: 'var(--tg-theme-text-color)'
                     }}>
-                      <div style={{ 
-                        fontSize: '16px', 
-                        fontWeight: '500', 
-                        marginBottom: 'var(--tg-spacing-xs, 4px)',
-                        color: 'var(--tg-theme-text-color, #000)'
-                      }}>
-                        {product.name}
-                      </div>
-                      <div style={{ 
-                        fontSize: '16px', 
-                        fontWeight: '600', 
-                        color: 'var(--tg-theme-text-color, #000)' 
-                      }}>
-                        {product.price}
-                      </div>
-                    </div>
+                      {product.price}
+                    </Caption>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </Cell>
+              </Link>
+            ))}
           </div>
-        </Section>
-      </div>
+        </List>
+      </Section>
+
+      {/* Дополнительная информация */}
+      <Section
+        header="Возможности"
+        footer="Используйте эти страницы для изучения функций Telegram Mini Apps"
+      >
+        <Link to="/ton-connect">
+          <Cell
+            before={<Image src="https://cdn.prod.website-files.com/68ca28d130f45cfc8a33cc46/68caf0b0f0ae177bce7aa001_Group%206.svg" style={{ backgroundColor: '#007AFF' }}/>}
+            subtitle="Подключите ваш TON кошелек"
+          >
+            TON Connect
+          </Cell>
+        </Link>
+      </Section>
     </Page>
   );
 };

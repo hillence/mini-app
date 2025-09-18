@@ -1,5 +1,15 @@
 import { FC, useState, useEffect } from 'react';
-import { Section, Input, Button } from '@telegram-apps/telegram-ui';
+import { 
+  Section, 
+  Input, 
+  Button, 
+  List, 
+  Cell, 
+  Title, 
+  Text,
+  Textarea,
+  Divider 
+} from '@telegram-apps/telegram-ui';
 import { Page } from '@/components/Page.tsx';
 import { mountMainButton } from '@telegram-apps/sdk-react';
 
@@ -48,105 +58,71 @@ export const OrderPage: FC = () => {
 
   return (
     <Page back={true}>
-      <div style={{
-        backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
-        minHeight: '100vh',
-        fontFamily: 'var(--tg-font-family, -apple-system)',
-        paddingTop: '110px'
-      }}>
-        <Section style={{ 
-          backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', 
-          padding: 'var(--tg-spacing-l, 16px)', 
-          border: 'none'
-        }}>
-          <h1 style={{
-            margin: 0,
-            marginBottom: 'var(--tg-spacing-xl, 24px)',
-            fontSize: '24px',
-            fontWeight: '600',
-            color: 'var(--tg-theme-text-color, #000)',
-            fontFamily: 'var(--tg-font-family, -apple-system)'
-          }}>
-            Контактная информация
-          </h1>
-
-          {/* Получатель */}
-          <div style={{ marginBottom: 'var(--tg-spacing-l, 16px)' }}>
-            <label style={{
-              display: 'block',
-              marginBottom: 'var(--tg-spacing-s, 8px)',
-              fontSize: '17px',
+      <List>
+        {/* Заголовок */}
+        <Section>
+          <Cell>
+            <Title level="1" style={{
+              fontSize: '24px',
               fontWeight: '600',
-              color: 'var(--tg-theme-text-color, #000)',
-              fontFamily: 'var(--tg-font-family, -apple-system)'
+              marginBottom: 'var(--tg-spacing-m)'
             }}>
-              Получатель
-            </label>
+              Контактная информация
+            </Title>
+          </Cell>
+        </Section>
+
+        {/* Контактная информация */}
+        <Section header="Получатель">
+          <Cell>
             <Input
               placeholder="Получатель"
               value={formData.recipient}
               onChange={(e) => handleInputChange('recipient', e.target.value)}
-              style={{
-                width: '100%',
-                fontFamily: 'var(--tg-font-family, -apple-system)'
-              }}
             />
-          </div>
-
-          {/* Имя */}
-          <div style={{ marginBottom: 'var(--tg-spacing-l, 16px)' }}>
+          </Cell>
+          <Cell>
             <Input
               placeholder="Имя"
               value={formData.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
-              style={{
-                width: '100%',
-                fontFamily: 'var(--tg-font-family, -apple-system)'
-              }}
             />
-          </div>
-
-          {/* Фамилия */}
-          <div style={{ marginBottom: 'var(--tg-spacing-l, 16px)' }}>
+          </Cell>
+          <Cell>
             <Input
               placeholder="Фамилия"
               value={formData.surname}
               onChange={(e) => handleInputChange('surname', e.target.value)}
-              style={{
-                width: '100%',
-                fontFamily: 'var(--tg-font-family, -apple-system)'
-              }}
             />
-          </div>
-
-          {/* Отчество */}
-          <div style={{ marginBottom: 'var(--tg-spacing-l, 16px)' }}>
+          </Cell>
+          <Cell>
             <Input
               placeholder="Отчество"
               value={formData.patronymic}
               onChange={(e) => handleInputChange('patronymic', e.target.value)}
-              style={{
-                width: '100%',
-                fontFamily: 'var(--tg-font-family, -apple-system)'
-              }}
             />
-          </div>
+          </Cell>
+        </Section>
 
-          {/* Телефон */}
-          <div style={{ marginBottom: 'var(--tg-spacing-xl, 24px)' }}>
+        <Divider />
+
+        {/* Телефон */}
+        <Section>
+          <Cell>
             <div style={{ 
               display: 'flex', 
               alignItems: 'center',
-              border: '1px solid var(--tg-theme-separator-color, #E5E5EA)',
-              borderRadius: 'var(--tg-border-radius, 12px)',
-              overflow: 'hidden'
+              border: '1px solid var(--tg-theme-separator-color)',
+              borderRadius: 'var(--tg-border-radius-m)',
+              overflow: 'hidden',
+              backgroundColor: 'var(--tg-theme-bg-color)'
             }}>
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 padding: '12px 16px',
-                backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
-                borderRight: '1px solid var(--tg-theme-separator-color, #E5E5EA)'
+                backgroundColor: 'var(--tg-theme-secondary-bg-color)',
+                borderRight: '1px solid var(--tg-theme-separator-color)'
               }}>
                 <div style={{
                   width: '24px',
@@ -172,13 +148,7 @@ export const OrderPage: FC = () => {
                     backgroundColor: '#D52B1E'
                   }} />
                 </div>
-                <span style={{
-                  fontSize: '17px',
-                  fontFamily: 'var(--tg-font-family, -apple-system)',
-                  color: 'var(--tg-theme-text-color, #000)'
-                }}>
-                  +7
-                </span>
+                <Text style={{ fontSize: '17px' }}>+7</Text>
               </div>
               <input
                 type="tel"
@@ -191,73 +161,46 @@ export const OrderPage: FC = () => {
                   border: 'none',
                   outline: 'none',
                   fontSize: '17px',
-                  fontFamily: 'var(--tg-font-family, -apple-system)',
                   backgroundColor: 'transparent',
-                  color: 'var(--tg-theme-text-color, #000)'
+                  color: 'var(--tg-theme-text-color)'
                 }}
               />
             </div>
-          </div>
+          </Cell>
+        </Section>
 
-          {/* Примечание к заказу */}
-          <div style={{ marginBottom: 'var(--tg-spacing-l, 16px)' }}>
-            <label style={{
-              display: 'block',
-              marginBottom: 'var(--tg-spacing-s, 8px)',
-              fontSize: '17px',
-              fontWeight: '600',
-              color: 'var(--tg-theme-text-color, #000)',
-              fontFamily: 'var(--tg-font-family, -apple-system)'
-            }}>
-              Примечание к заказу
-            </label>
-            <textarea
+        <Divider />
+
+        {/* Примечание к заказу */}
+        <Section header="Примечание к заказу">
+          <Cell>
+            <Textarea
               placeholder="Комментарии к заказу"
               value={formData.comment}
               onChange={(e) => handleInputChange('comment', e.target.value)}
               rows={3}
-              style={{
-                width: '100%',
-                padding: '12px 16px',
-                border: '1px solid var(--tg-theme-separator-color, #E5E5EA)',
-                borderRadius: 'var(--tg-border-radius, 12px)',
-                fontSize: '17px',
-                fontFamily: 'var(--tg-font-family, -apple-system)',
-                backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
-                color: 'var(--tg-theme-text-color, #000)',
-                outline: 'none',
-                resize: 'vertical',
-                boxSizing: 'border-box'
-              }}
             />
-          </div>
+          </Cell>
+        </Section>
 
-          {/* Адрес доставки */}
-          <div style={{ marginBottom: 'var(--tg-spacing-xl, 24px)' }}>
-            <label style={{
-              display: 'block',
-              marginBottom: 'var(--tg-spacing-s, 8px)',
-              fontSize: '17px',
-              fontWeight: '600',
-              color: 'var(--tg-theme-text-color, #000)',
-              fontFamily: 'var(--tg-font-family, -apple-system)'
-            }}>
-              Куда
-            </label>
-            
+        <Divider />
+
+        {/* Адрес доставки */}
+        <Section header="Куда">
+          <Cell>
             <div style={{
               display: 'flex',
               alignItems: 'center',
               padding: '12px 16px',
-              border: '1px solid var(--tg-theme-separator-color, #E5E5EA)',
-              borderRadius: 'var(--tg-border-radius, 12px)',
-              marginBottom: 'var(--tg-spacing-l, 16px)'
+              border: '1px solid var(--tg-theme-separator-color)',
+              borderRadius: 'var(--tg-border-radius-m)',
+              backgroundColor: 'var(--tg-theme-bg-color)'
             }}>
               <div style={{
                 width: '24px',
                 height: '24px',
                 marginRight: '12px',
-                backgroundColor: 'var(--tg-theme-hint-color, #8E8E93)',
+                backgroundColor: 'var(--tg-theme-hint-color)',
                 borderRadius: '4px',
                 display: 'flex',
                 alignItems: 'center',
@@ -276,59 +219,62 @@ export const OrderPage: FC = () => {
                   border: 'none',
                   outline: 'none',
                   fontSize: '17px',
-                  fontFamily: 'var(--tg-font-family, -apple-system)',
                   backgroundColor: 'transparent',
-                  color: 'var(--tg-theme-text-color, #000)'
+                  color: 'var(--tg-theme-text-color)'
                 }}
               />
             </div>
+          </Cell>
+        </Section>
 
-            {/* Подъезд и домофон */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 'var(--tg-spacing-m, 12px)',
-              marginBottom: 'var(--tg-spacing-l, 16px)'
-            }}>
+        {/* Детали адреса */}
+        <Section>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'var(--tg-spacing-m)'
+          }}>
+            <Cell>
               <Input
                 placeholder="Подъезд"
                 value={formData.entrance}
                 onChange={(e) => handleInputChange('entrance', e.target.value)}
-                style={{ fontFamily: 'var(--tg-font-family, -apple-system)' }}
               />
+            </Cell>
+            <Cell>
               <Input
                 placeholder="Домофон"
                 value={formData.intercom}
                 onChange={(e) => handleInputChange('intercom', e.target.value)}
-                style={{ fontFamily: 'var(--tg-font-family, -apple-system)' }}
               />
-            </div>
-
-            {/* Квартира и этаж */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 'var(--tg-spacing-m, 12px)'
-            }}>
+            </Cell>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'var(--tg-spacing-m)',
+            marginTop: 'var(--tg-spacing-m)'
+          }}>
+            <Cell>
               <Input
                 placeholder="Кв/офис"
                 value={formData.apartment}
                 onChange={(e) => handleInputChange('apartment', e.target.value)}
-                style={{ fontFamily: 'var(--tg-font-family, -apple-system)' }}
               />
+            </Cell>
+            <Cell>
               <Input
                 placeholder="Этаж"
                 value={formData.floor}
                 onChange={(e) => handleInputChange('floor', e.target.value)}
-                style={{ fontFamily: 'var(--tg-font-family, -apple-system)' }}
               />
-            </div>
+            </Cell>
           </div>
-
-          {/* Отступ снизу для MainButton */}
-          <div style={{ height: '80px' }} />
         </Section>
-      </div>
+
+        {/* Отступ для MainButton */}
+        <div style={{ height: '80px' }} />
+      </List>
     </Page>
   );
 };

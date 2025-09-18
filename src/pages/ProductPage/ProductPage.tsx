@@ -10,14 +10,14 @@ export const ProductPage: FC = () => {
   const product = products.find(p => p.id === Number(id));
 
   useEffect(() => {
-    let button: any = null;
+    let button: ReturnType<typeof mountMainButton> | null = null;
     try {
       button = mountMainButton();
       button.setText('Добавить в корзину');
       button.setBgColor('#007AFF');
       button.onClick(() => console.log('Добавить в корзину:', product?.name));
       button.show();
-    } catch (error) {
+    } catch {
       console.log('MainButton недоступен');
     }
 
@@ -25,7 +25,7 @@ export const ProductPage: FC = () => {
       if (button) {
         try {
           button.hide();
-        } catch (error) {
+        } catch {
           console.log('Ошибка при скрытии MainButton');
         }
       }

@@ -1,3 +1,4 @@
+
 import { Section, Image, IconButton, Button } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
 import { useState, useRef, useEffect } from 'react';
@@ -9,15 +10,15 @@ import { Page } from '@/components/Page.tsx';
 const bannerImages = [
   'https://cdn.prod.website-files.com/68ca28d130f45cfc8a33cc46/68caf06c625434050c2cbe65_Group%204.png',
   'https://cdn.prod.website-files.com/68ca28d130f45cfc8a33cc46/68caf0886d01bbaf69975fde_Group%205.png',
-  'https://example.com/banner3.jpg',
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop&crop=center',
 ];
 
 export const products = [
   { id: 1, name: 'Кондиционер 1', price: '18 000 ₽', image: 'https://basket-16.wbbasket.ru/vol2546/part254650/254650733/images/big/1.webp', description: 'Мощный кондиционер для охлаждения больших помещений', category: 'premium' },
-  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://example.com/bag.jpg', description: 'Компактный кондиционер для маленьких комнат', category: 'cheap' },
-  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg', description: 'Энергоэффективный кондиционер с низким уровнем шума', category: 'premium' },
-  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://example.com/sweater.jpg', description: 'Бюджетный кондиционер для дачи', category: 'cheap' },
-  { id: 5, name: 'Кондиционер 5', price: '8 500 ₽', image: 'https://example.com/swрeater.jpg', description: 'Умный кондиционер с Wi-Fi управлением', category: 'expensive' },
+  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://images.unsplash.com/photo-1631545806609-1a5b9e3e7c2a?w=400&h=400&fit=crop', description: 'Компактный кондиционер для маленьких комнат', category: 'cheap' },
+  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop', description: 'Энергоэффективный кондиционер с низким уровнем шума', category: 'premium' },
+  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://images.unsplash.com/photo-1585338447937-7082f8fc763d?w=400&h=400&fit=crop', description: 'Бюджетный кондиционер для дачи', category: 'cheap' },
+  { id: 5, name: 'Кондиционер 5', price: '8 500 ₽', image: 'https://images.unsplash.com/photo-1631545806609-1a5b9e3e7c2a?w=400&h=400&fit=crop&crop=top', description: 'Умный кондиционер с Wi-Fi управлением', category: 'expensive' },
 ];
 
 export const IndexPage: FC = () => {
@@ -218,7 +219,7 @@ export const IndexPage: FC = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundImage: 'url("https://',
+                   backgroundImage: 'url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&h=200&fit=crop")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 opacity: 0.3
@@ -252,7 +253,7 @@ export const IndexPage: FC = () => {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  backgroundImage: 'url("https://',
+                  backgroundImage: 'url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=200&fit=crop")',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   opacity: 0.3

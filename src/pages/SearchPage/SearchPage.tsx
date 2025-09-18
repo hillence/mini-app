@@ -1,21 +1,12 @@
 import { FC, useState, useEffect } from 'react';
 import { Section, Image } from '@telegram-apps/telegram-ui';
-import { useNavigate } from 'react-router-dom';
 import { Page } from '@/components/Page.tsx';
 import { Link } from '@/components/Link/Link.tsx';
-
-const products = [
-  { id: 1, name: 'Кондиционер 1', price: '18 000 ₽', image: 'https://basket-16.wbbasket.ru/vol2546/part254650/254650733/images/big/1.webp' },
-  { id: 2, name: 'Кондиционер 2', price: '9 650 ₽', image: 'https://example.com/bag.jpg' },
-  { id: 3, name: 'Кондиционер 3', price: '11 747 ₽', image: 'https://example.com/sneakers.jpg' },
-  { id: 4, name: 'Кондиционер 4', price: '4 500 ₽', image: 'https://example.com/sweater.jpg' },
-  { id: 5, name: 'Кондиционер 5', price: '8 500 ₽', image: 'https://example.com/swрeater.jpg' },
-];
+import { products } from '@/pages/IndexPage/IndexPage.tsx';
 
 export const SearchPage: FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (searchQuery.trim()) {

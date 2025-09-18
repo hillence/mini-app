@@ -20,14 +20,14 @@ export const OrderPage: FC = () => {
   });
 
   useEffect(() => {
-    let button: any = null;
+    let button: ReturnType<typeof mountMainButton> | null = null;
     try {
       button = mountMainButton();
       button.setText('Заказать услугу');
       button.setBgColor('#007AFF');
       button.onClick(() => console.log('Заказать услугу:', formData));
       button.show();
-    } catch (error) {
+    } catch {
       console.log('MainButton недоступен');
     }
 
@@ -35,7 +35,7 @@ export const OrderPage: FC = () => {
       if (button) {
         try {
           button.hide();
-        } catch (error) {
+        } catch {
           console.log('Ошибка при скрытии MainButton');
         }
       }

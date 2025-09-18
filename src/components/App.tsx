@@ -12,9 +12,9 @@ export function App() {
   // Включить fullscreen режим и отключить вертикальные свайпы
   useEffect(() => {
     try {
-      requestFullscreen();
-      disableVerticalSwipes();
-    } catch (error) {
+      void requestFullscreen();
+      void disableVerticalSwipes();
+    } catch {
       console.log('Fullscreen или disableVerticalSwipes не поддерживается');
     }
   }, []);

@@ -2,7 +2,8 @@ import {
   Section, 
   Image, 
   IconButton, 
-  Button
+  Button,
+  Cell
 } from '@telegram-apps/telegram-ui';
 import type { FC } from 'react';
 import { useState, useRef, useEffect } from 'react';
@@ -79,7 +80,7 @@ export const IndexPage: FC = () => {
           backgroundColor: 'var(--tg-theme-bg-color, #ffffff)',
           borderBottom: '0.5px solid var(--tg-theme-separator-color, #E5E5EA)',
           zIndex: 1000,
-          paddingTop: 'env(safe-area-inset-top, 0px)'
+          paddingTop: '0px'
         }}>
           <Section style={{ backgroundColor: 'transparent', padding: 'var(--tg-spacing-l, 16px)', border: 'none' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--tg-spacing-l, 16px)' }}>
@@ -101,7 +102,7 @@ export const IndexPage: FC = () => {
               </IconButton>
             </div>
             
-            {/* Статичные кнопки категорий */}
+            {/* Кнопки категорий */}
             <div style={{
               display: 'flex',
               gap: 'var(--tg-spacing-s, 8px)',
@@ -194,24 +195,28 @@ export const IndexPage: FC = () => {
           </div>
         </Section>
 
-        {/* Промо секции между Акциями и Товарами */}
+        {/* Услуги - отступ 30px сверху */}
         <Section style={{ backgroundColor: 'var(--tg-theme-bg-color, #ffffff)', padding: 'var(--tg-spacing-l, 16px)', border: 'none', marginBottom: 'var(--tg-spacing-l, 16px)', marginTop: '30px' }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: 'var(--tg-spacing-s, 8px)'
           }}>
-            <div style={{
-              width: '100%',
-              height: '184px',
-              backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              borderRadius: 'var(--tg-border-radius, 12px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
+            <Cell
+              style={{
+                width: '100%',
+                height: '184px',
+                backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: 'var(--tg-border-radius, 12px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                overflow: 'hidden',
+                border: 'none',
+                padding: 0
+              }}
+            >
               <div style={{
                 position: 'absolute',
                 top: 0,
@@ -232,20 +237,24 @@ export const IndexPage: FC = () => {
               }}>
                 УСТАНОВКА
               </span>
-            </div>
+            </Cell>
             <Link to="/order" style={{ textDecoration: 'none' }}>
-              <div style={{
-                width: '100%',
-                height: '184px',
-                backgroundImage: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                borderRadius: 'var(--tg-border-radius, 12px)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative',
-                overflow: 'hidden',
-                cursor: 'pointer'
-              }}>
+              <Cell
+                style={{
+                  width: '100%',
+                  height: '184px',
+                  backgroundImage: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                  borderRadius: 'var(--tg-border-radius, 12px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  border: 'none',
+                  padding: 0
+                }}
+              >
                 <div style={{
                   position: 'absolute',
                   top: 0,
@@ -266,7 +275,7 @@ export const IndexPage: FC = () => {
                 }}>
                   РЕМОНТ И ОБСЛУЖИВАНИЕ
                 </span>
-              </div>
+              </Cell>
             </Link>
           </div>
         </Section>
@@ -292,7 +301,7 @@ export const IndexPage: FC = () => {
           >
             {filteredProducts.map((product) => (
               <Link key={product.id} to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                <div
+                <Cell
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -301,6 +310,8 @@ export const IndexPage: FC = () => {
                     backgroundColor: 'var(--tg-theme-secondary-bg-color, #f1f1f1)',
                     borderRadius: 'var(--tg-border-radius, 12px)',
                     overflow: 'hidden',
+                    border: 'none',
+                    padding: 0
                   }}
                 >
                   <div style={{
@@ -327,7 +338,7 @@ export const IndexPage: FC = () => {
                     <div style={{ fontSize: '16px', fontWeight: '500', marginBottom: '4px', fontFamily: 'var(--tg-font-family, -apple-system)', color: 'var(--tg-theme-text-color, #000)' }}>{product.name}</div>
                     <div style={{ fontSize: '16px', fontWeight: '600', color: 'var(--tg-theme-text-color, #000)', fontFamily: 'var(--tg-font-family, -apple-system)' }}>{product.price}</div>
                   </div>
-                </div>
+                </Cell>
               </Link>
             ))}
           </div>
